@@ -12,20 +12,33 @@ public class GameWorld: SKScene {
         case downArrow = 125
     }
     
-    public let macOSKeyToFunc: [UInt16:(String) -> Void] = []
-    
     public var levelReference: SKReferenceNode!
+    public var cameraNode: SKCameraNode!
     public var levelName: String!
     public var player: SKSpriteNode!
     
     public override func didMove(to view: SKView) {
-        // Get label node from scene and store it for use later
+        physicsWorld.gravity = CGVector(dx: 0, dy: 0)
+        let background = SKSpriteNode(imageNamed: "textureReverseSky")
+        background.position = .init(x: frame.midX, y: frame.midY)
+        background.xScale = 3
+        background.yScale = 6
+        background.zPosition = -1
+        addChild(background)
         
-        levelReference = childNode(withName: "//LevelReference") as? SKReferenceNode
-        levelName = "Reverse"
-        levelReference.resolve()
-        player = childNode(withName: "//Meep") as? SKSpriteNode
-        print(player)
+        player = SKSpriteNode(imageNamed: "textureReversePlayer")
+        player.position = .init(x: frame.midX, y: frame.midY)
+        player.zRotation = .pi / 1
+        player.xScale = 2
+        player.yScale = 2
+        addChild(player)
+//        levelReference = childNode(withName: "//LevelReference") as? SKReferenceNode
+//        levelReference.resolve()
+//        levelName = "Reverse"
+//        cameraNode = childNode(withName: "//Camera") as? SKCameraNode
+//        self.camera = cameraNode
+//        player = childNode(withName: "//Meep") as? SKSpriteNode
+//        // print(player)
     }
     
     @objc static public override var supportsSecureCoding: Bool {
@@ -36,25 +49,33 @@ public class GameWorld: SKScene {
         }
     }
     
-    func runPlayer(level: String) {
-        let xAddValue: CGFloat = level == "Reverse" ? -30 : 30
-        player.position.x += xAddValue
-    }
-    
-    #if os(macOS)
-    public override func keyDown(with event: NSEvent) {
-        let key = event.keyCode
-        switch key {
-        case macOSKeyMap.leftArrow.rawValue:
-            runPlayer(level: "Reverse")
-        default:
-            print(key)
-        }
-    }
-    #endif
+//    func runPlayer(level: String) {
+//        let xAddValue: CGFloat = level == "Reverse" ? -30 : 30
+//        player.position.x += xAddValue
+//    }
+//
+//    func moveBackPlayer(level: String) {
+//        let xAddValue: CGFloat = level == "Reverse" ? 30 : -30
+//        player.position.x += xAddValue
+//    }
+//
+//    #if os(macOS)
+//    public override func keyDown(with event: NSEvent) {
+//        let key = event.keyCode
+//        switch key {
+//        case macOSKeyMap.leftArrow.rawValue:
+//            runPlayer(level: "Reverse")
+//        case macOSKeyMap.rightArrow.rawValue:
+//            moveBackPlayer(level: "Reverse")
+//        default:
+//            print(key)
+//        }
+//    }
+//    #endif
     
     public override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
+//        cameraNode.position = .init(x: player.position.x, y: player.position.y)
     }
 }
 
