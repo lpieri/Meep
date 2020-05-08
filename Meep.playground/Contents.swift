@@ -18,7 +18,8 @@ public class GameWorld: SKScene {
     public var player: SKSpriteNode!
     
     public override func didMove(to view: SKView) {
-        physicsWorld.gravity = CGVector(dx: 0, dy: 0)
+        physicsWorld.gravity = CGVector(dx: 0, dy: 9)
+        
         let background = SKSpriteNode(imageNamed: "textureReverseSky")
         background.position = .init(x: frame.midX, y: frame.midY)
         background.xScale = 3
@@ -26,19 +27,27 @@ public class GameWorld: SKScene {
         background.zPosition = -1
         addChild(background)
         
+        let floor = SKSpriteNode(imageNamed: "textureFloor")
+        floor.name = "Floor"
+        floor.position = .init(x: 0, y: frame.maxY)
+        floor.xScale = 3
+        floor.yScale = 3
+        floor.physicsBody = SKPhysicsBody(rectangleOf: floor.size)
+        floor.physicsBody?.isDynamic = false
+        floor.physicsBody?.affectedByGravity = false
+        floor.physicsBody?.allowsRotation = false
+        addChild(floor)
+
         player = SKSpriteNode(imageNamed: "textureReversePlayer")
+        player.name = "Meep"
         player.position = .init(x: frame.midX, y: frame.midY)
         player.zRotation = .pi / 1
         player.xScale = 2
         player.yScale = 2
+        player.physicsBody = SKPhysicsBody(texture: player.texture!, size: player.size)
+        player.physicsBody?.allowsRotation = false
         addChild(player)
-//        levelReference = childNode(withName: "//LevelReference") as? SKReferenceNode
-//        levelReference.resolve()
-//        levelName = "Reverse"
-//        cameraNode = childNode(withName: "//Camera") as? SKCameraNode
-//        self.camera = cameraNode
-//        player = childNode(withName: "//Meep") as? SKSpriteNode
-//        // print(player)
+
     }
     
     @objc static public override var supportsSecureCoding: Bool {
@@ -49,29 +58,29 @@ public class GameWorld: SKScene {
         }
     }
     
-//    func runPlayer(level: String) {
-//        let xAddValue: CGFloat = level == "Reverse" ? -30 : 30
-//        player.position.x += xAddValue
-//    }
-//
-//    func moveBackPlayer(level: String) {
-//        let xAddValue: CGFloat = level == "Reverse" ? 30 : -30
-//        player.position.x += xAddValue
-//    }
-//
-//    #if os(macOS)
-//    public override func keyDown(with event: NSEvent) {
-//        let key = event.keyCode
-//        switch key {
-//        case macOSKeyMap.leftArrow.rawValue:
-//            runPlayer(level: "Reverse")
-//        case macOSKeyMap.rightArrow.rawValue:
-//            moveBackPlayer(level: "Reverse")
-//        default:
-//            print(key)
-//        }
-//    }
-//    #endif
+    func runPlayer(level: String) {
+        let xAddValue: CGFloat = level == "Reverse" ? -30 : 30
+        player.position.x += xAddValue
+    }
+
+    func moveBackPlayer(level: String) {
+        let xAddValue: CGFloat = level == "Reverse" ? 30 : -30
+        player.position.x += xAddValue
+    }
+
+    #if os(macOS)
+    public override func keyDown(with event: NSEvent) {
+        let key = event.keyCode
+        switch key {
+        case macOSKeyMap.leftArrow.rawValue:
+            runPlayer(level: "Reverse")
+        case macOSKeyMap.rightArrow.rawValue:
+            moveBackPlayer(level: "Reverse")
+        default:
+            print(key)
+        }
+    }
+    #endif
     
     public override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
