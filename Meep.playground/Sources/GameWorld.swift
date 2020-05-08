@@ -1,7 +1,7 @@
 import SpriteKit
 
-public class GameScene: SKScene {
-
+public class GameWorld: SKScene {
+    
     public override func didMove(to view: SKView) {
         // Get label node from scene and store it for use later
     }
