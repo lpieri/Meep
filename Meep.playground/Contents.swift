@@ -12,49 +12,26 @@ public class GameWorld: SKScene {
         case downArrow = 125
     }
     
+    public var background: SKSpriteNode!
     public var levelReference: SKReferenceNode!
     public var cameraNode: SKCameraNode!
     public var levelName: String!
     public var player: SKSpriteNode!
     
     public override func didMove(to view: SKView) {
-        physicsWorld.gravity = CGVector(dx: 0, dy: 9)
-        
-        let background = SKSpriteNode(imageNamed: "textureReverseSky")
-        background.position = .init(x: frame.midX, y: frame.midY)
-        background.xScale = 3
-        background.yScale = 6
-        background.zPosition = -1
-        addChild(background)
-        
-        let floor = SKSpriteNode(imageNamed: "textureFloor")
-        floor.name = "Floor"
-        floor.position = .init(x: 0, y: frame.maxY)
-        floor.xScale = 3
-        floor.yScale = 3
-        floor.physicsBody = SKPhysicsBody(rectangleOf: floor.size)
-        floor.physicsBody?.isDynamic = false
-        floor.physicsBody?.affectedByGravity = false
-        floor.physicsBody?.allowsRotation = false
-        addChild(floor)
 
-        player = SKSpriteNode(imageNamed: "textureReversePlayer")
-        player.name = "Meep"
-        player.position = .init(x: frame.midX, y: frame.midY)
-        player.zRotation = .pi / 1
-        player.xScale = 2
-        player.yScale = 2
-        player.physicsBody = SKPhysicsBody(texture: player.texture!, size: player.size)
-        player.physicsBody?.isDynamic = true
-        player.physicsBody?.allowsRotation = false
-        addChild(player)
-
+        player = childNode(withName: "//Meep") as? SKSpriteNode
+        
+        cameraNode = SKCameraNode()
+        let x = (size.width / 2) - (view.bounds.width / 2)
+        cameraNode.position = .init(x: x, y: frame.midY)
+        camera = cameraNode
+        addChild(cameraNode)
+        
         physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
     }
     
     @objc static public override var supportsSecureCoding: Bool {
-        // SKNode conforms to NSSecureCoding, so any subclass going
-        // through the decoding process must support secure coding
         get {
             return true
         }
@@ -62,14 +39,14 @@ public class GameWorld: SKScene {
     
     func runPlayer(level: String) {
         let xAddValue: CGFloat = level == "Reverse" ? -30 : 30
-        if player.position.x + xAddValue > frame.minX {
+        if player.position.x + xAddValue > cameraNode.position.x - 512 {
             player.position.x += xAddValue
         }
     }
 
     func moveBackPlayer(level: String) {
         let xAddValue: CGFloat = level == "Reverse" ? 30 : -30
-        if player.position.x + xAddValue < frame.maxX {
+        if player.position.x + xAddValue < cameraNode.position.x + 512 {
             player.position.x += xAddValue
         }
     }
@@ -118,8 +95,12 @@ public class GameWorld: SKScene {
     #endif
     
     public override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
-//        cameraNode.position = .init(x: player.position.x, y: player.position.y)
+        if player.position.x < cameraNode.position.x {
+            if player.position.x > -1536 {
+                cameraNode.position = .init(x: player.position.x, y: 0)
+            }
+        }
+        
     }
 }
 
@@ -127,7 +108,7 @@ let Width = 1024
 let Height = 768
 
 let sceneView = SKView(frame: CGRect(x:0 , y:0, width: Width, height: Height))
-if let scene = GameWorld(fileNamed: "GameScene") {
+if let scene = GameWorld(fileNamed: "levelReverse") {
     scene.scaleMode = .aspectFill
     sceneView.presentScene(scene)
 }
