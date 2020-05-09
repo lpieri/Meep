@@ -3,6 +3,15 @@
 import PlaygroundSupport
 import SpriteKit
 
+let historyText = """
+Meep is a little blue monster,
+he lives in a universe where all monsters are blue,
+but Meep is not a monster like the others...
+
+Meep is a transgender monster...
+She dreams of becoming a pink monster in the other universe.
+"""
+
 public class GameWorld: SKScene {
     
     enum macOSKeyMap: UInt16 {
@@ -12,12 +21,26 @@ public class GameWorld: SKScene {
         case downArrow = 125
     }
     
-    public var background: SKSpriteNode!
-    public var levelReference: SKReferenceNode!
     public var flyingPlatform: SKSpriteNode!
     public var cameraNode: SKCameraNode!
-    public var levelName: String!
     public var player: SKSpriteNode!
+    
+    func writingHistory() -> SKAction {
+        return SKAction.run {
+            let text = SKLabelNode(text: historyText)
+            text.lineBreakMode = .byCharWrapping
+            text.numberOfLines = 3
+            text.color = .white
+            text.alpha = 0.0
+            text.fontSize = 21
+            text.position = .init(x: self.frame.maxX - 265, y: self.frame.minY + 100)
+            let appear = SKAction.fadeIn(withDuration: 1)
+            let disappear = SKAction.fadeOut(withDuration: 1)
+            let textPrintActionSequence = SKAction.sequence([appear, .wait(forDuration: 10), disappear])
+            self.addChild(text)
+            text.run(textPrintActionSequence)
+        }
+    }
     
     func flyingPlatformAction(direction: String) -> SKAction {
         let upValue: CGFloat = 150
@@ -36,6 +59,7 @@ public class GameWorld: SKScene {
 
         let flyingPlatformActionSequence = SKAction.sequence([flyingPlatformAction(direction: "down"), .wait(forDuration: 3), flyingPlatformAction(direction: "up"), .wait(forDuration: 3)])
         
+        self.run(writingHistory())
         player = childNode(withName: "//Meep") as? SKSpriteNode
         flyingPlatform = childNode(withName: "//FlyingPlatform") as? SKSpriteNode
         
