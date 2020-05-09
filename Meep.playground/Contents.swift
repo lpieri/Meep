@@ -43,7 +43,7 @@ public class GameWorld: SKScene {
     }
     
     func flyingPlatformAction(direction: String) -> SKAction {
-        let upValue: CGFloat = 150
+        let upValue: CGFloat = 240
         return SKAction.run {
             if direction == "down" {
                 let move = SKAction.moveTo(y: self.flyingPlatform.position.y - upValue, duration: 1)
@@ -95,7 +95,7 @@ public class GameWorld: SKScene {
     }
     
     func jumpPlayer(level: String) {
-        let yAddValue: CGFloat = level == "Reverse" ? -30 : 30
+        let yAddValue: CGFloat = level == "Reverse" ? -50 : 50
         player.position.y += yAddValue
     }
 
