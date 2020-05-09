@@ -14,13 +14,32 @@ public class GameWorld: SKScene {
     
     public var background: SKSpriteNode!
     public var levelReference: SKReferenceNode!
+    public var flyingPlatform: SKSpriteNode!
     public var cameraNode: SKCameraNode!
     public var levelName: String!
     public var player: SKSpriteNode!
     
+    func flyingPlatformAction(direction: String) -> SKAction {
+        let upValue: CGFloat = 150
+        return SKAction.run {
+            if direction == "down" {
+                let move = SKAction.moveTo(y: self.flyingPlatform.position.y - upValue, duration: 1)
+                self.flyingPlatform.run(move)
+            } else {
+                let move = SKAction.moveTo(y: self.flyingPlatform.position.y + upValue, duration: 1)
+                self.flyingPlatform.run(move)
+            }
+        }
+    }
+    
     public override func didMove(to view: SKView) {
 
+        let flyingPlatformActionSequence = SKAction.sequence([flyingPlatformAction(direction: "down"), .wait(forDuration: 3), flyingPlatformAction(direction: "up"), .wait(forDuration: 3)])
+        
         player = childNode(withName: "//Meep") as? SKSpriteNode
+        flyingPlatform = childNode(withName: "//FlyingPlatform") as? SKSpriteNode
+        
+        flyingPlatform.run(.repeatForever(flyingPlatformActionSequence))
         
         cameraNode = SKCameraNode()
         let x = (size.width / 2) - (view.bounds.width / 2)
