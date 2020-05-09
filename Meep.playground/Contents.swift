@@ -45,9 +45,11 @@ public class GameWorld: SKScene {
         player.xScale = 2
         player.yScale = 2
         player.physicsBody = SKPhysicsBody(texture: player.texture!, size: player.size)
+        player.physicsBody?.isDynamic = true
         player.physicsBody?.allowsRotation = false
         addChild(player)
 
+        physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
     }
     
     @objc static public override var supportsSecureCoding: Bool {
@@ -60,14 +62,33 @@ public class GameWorld: SKScene {
     
     func runPlayer(level: String) {
         let xAddValue: CGFloat = level == "Reverse" ? -30 : 30
-        player.position.x += xAddValue
+        if player.position.x + xAddValue > frame.minX {
+            player.position.x += xAddValue
+        }
     }
 
     func moveBackPlayer(level: String) {
         let xAddValue: CGFloat = level == "Reverse" ? 30 : -30
-        player.position.x += xAddValue
+        if player.position.x + xAddValue < frame.maxX {
+            player.position.x += xAddValue
+        }
+    }
+    
+    func jumpPlayer(level: String) {
+        let yAddValue: CGFloat = level == "Reverse" ? -30 : 30
+        player.position.y += yAddValue
     }
 
+    func squattingPlayer(level: String) {
+        player.texture = SKTexture(imageNamed: "textureSquattingReversePlayer")
+        player.yScale = 1
+    }
+    
+    func noSquattingPlayer(level: String) {
+        player.texture = SKTexture(imageNamed: "textureReversePlayer")
+        player.yScale = 2
+    }
+    
     #if os(macOS)
     public override func keyDown(with event: NSEvent) {
         let key = event.keyCode
@@ -76,8 +97,22 @@ public class GameWorld: SKScene {
             runPlayer(level: "Reverse")
         case macOSKeyMap.rightArrow.rawValue:
             moveBackPlayer(level: "Reverse")
+        case macOSKeyMap.downArrow.rawValue:
+            jumpPlayer(level: "Reverse")
+        case macOSKeyMap.upArrow.rawValue:
+            squattingPlayer(level: "Reverse")
         default:
-            print(key)
+            return
+        }
+    }
+    
+    public override func keyUp(with event: NSEvent) {
+        let key = event.keyCode
+        switch key {
+        case macOSKeyMap.upArrow.rawValue:
+            noSquattingPlayer(level: "Reverse")
+        default:
+            return
         }
     }
     #endif
