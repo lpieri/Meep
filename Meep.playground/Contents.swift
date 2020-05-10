@@ -21,6 +21,7 @@ public class GameWorld: SKScene {
         case downArrow = 125
     }
     
+    public var rotatePlatform: SKSpriteNode!
     public var flyingPlatform: SKSpriteNode!
     public var cameraNode: SKCameraNode!
     public var player: SKSpriteNode!
@@ -55,15 +56,27 @@ public class GameWorld: SKScene {
         }
     }
     
+    func rotatePlatformAction() -> SKAction {
+        let rotateValue: CGFloat = .pi / 2
+        return SKAction.run {
+            let rotateAction = SKAction.rotate(byAngle: rotateValue, duration: 1)
+            self.rotatePlatform.run(rotateAction)
+        }
+    }
+    
     public override func didMove(to view: SKView) {
 
         let flyingPlatformActionSequence = SKAction.sequence([flyingPlatformAction(direction: "down"), .wait(forDuration: 3), flyingPlatformAction(direction: "up"), .wait(forDuration: 3)])
         
+        let rotatePlatformActionSequence = SKAction.sequence([rotatePlatformAction(), .wait(forDuration: 2), rotatePlatformAction(), .wait(forDuration: 2)])
+        
         self.run(writingHistory())
         player = childNode(withName: "//Meep") as? SKSpriteNode
+        rotatePlatform = childNode(withName: "//RotatePlatform") as? SKSpriteNode
         flyingPlatform = childNode(withName: "//FlyingPlatform") as? SKSpriteNode
         
         flyingPlatform.run(.repeatForever(flyingPlatformActionSequence))
+        rotatePlatform.run(.repeatForever(rotatePlatformActionSequence))
         
         cameraNode = SKCameraNode()
         let x = (size.width / 2) - (view.bounds.width / 2)
