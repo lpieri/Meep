@@ -63,9 +63,10 @@ public class GameWorld: SKScene {
     }
     
     func flying(platform: SKSpriteNode) {
-        let upValue: CGFloat = 150
-        let flyDown = SKAction.moveTo(y: self.position.y - upValue, duration: 1)
-        let flyUp = SKAction.moveTo(y: self.position.y + upValue, duration: 1)
+        let upValue: CGFloat = 240
+        print(platform.position)
+        let flyDown = SKAction.moveTo(y: platform.position.y, duration: 1)
+        let flyUp = SKAction.moveTo(y: platform.position.y - upValue, duration: 1)
         let flyingActionSequence = SKAction.sequence([flyDown, .wait(forDuration: 3), flyUp, .wait(forDuration: 3)])
         platform.run(.repeatForever(flyingActionSequence))
     }
