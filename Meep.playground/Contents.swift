@@ -34,7 +34,6 @@ public class GameWorld: SKScene {
     }
     
     public var rotatePlatform: SKSpriteNode!
-    public var flyingPlatform: SKSpriteNode!
     public var cameraNode: SKCameraNode!
     public var player: SKSpriteNode!
     
@@ -54,20 +53,7 @@ public class GameWorld: SKScene {
             text.run(textPrintActionSequence)
         }
     }
-    
-    func flyingPlatformAction(direction: String) -> SKAction {
-        let upValue: CGFloat = 240
-        return SKAction.run {
-            if direction == "down" {
-                let move = SKAction.moveTo(y: self.flyingPlatform.position.y - upValue, duration: 1)
-                self.flyingPlatform.run(move)
-            } else {
-                let move = SKAction.moveTo(y: self.flyingPlatform.position.y + upValue, duration: 1)
-                self.flyingPlatform.run(move)
-            }
-        }
-    }
-    
+        
     func rotatePlatformAction() -> SKAction {
         let rotateValue: CGFloat = .pi / 2
         return SKAction.run {
@@ -77,22 +63,12 @@ public class GameWorld: SKScene {
     }
     
     public override func didMove(to view: SKView) {
-
-        let flyingPlatformActionSequence = SKAction.sequence([flyingPlatformAction(direction: "down"), .wait(forDuration: 3), flyingPlatformAction(direction: "up"), .wait(forDuration: 3)])
         
         let rotatePlatformActionSequence = SKAction.sequence([rotatePlatformAction(), .wait(forDuration: 2), rotatePlatformAction(), .wait(forDuration: 2)])
-        
-        // let wall = childNode(withName: "//Wall1") as! SKSpriteNode
-        // print(wall.frame)
-        // wall.physicsBody = SKPhysicsBody(edgeLoopFrom: wall.frame)
-        // wall.physicsBody?.isDynamic = true
         
         self.run(writingHistory())
         player = childNode(withName: "//Meep") as? SKSpriteNode
         rotatePlatform = childNode(withName: "//RotatePlatform") as? SKSpriteNode
-        flyingPlatform = childNode(withName: "//FlyingPlatform") as? SKSpriteNode
-        
-        flyingPlatform.run(.repeatForever(flyingPlatformActionSequence))
         rotatePlatform.run(.repeatForever(rotatePlatformActionSequence))
         
         cameraNode = SKCameraNode()
@@ -169,7 +145,7 @@ public class GameWorld: SKScene {
     #endif
     
     public override func update(_ currentTime: TimeInterval) {
-        enumerateChildNodes(withName: "FlyingPlatform") {
+        enumerateChildNodes(withName: "//FlyingPlatform") {
             node, stop in
             if let piece = node as? FlyingPlatform { // Cast to Sprite if we can
                 piece.flying()
