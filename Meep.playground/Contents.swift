@@ -12,18 +12,6 @@ Meep is a transgender monster...
 She dreams of becoming a pink monster in the other universe.
 """
 
-public class FlyingPlatform: SKSpriteNode {
-    
-    public func flying() {
-        let upValue: CGFloat = 240
-        let flyDown = SKAction.moveTo(y: self.position.y - upValue, duration: 1)
-        let flyUp = SKAction.moveTo(y: self.position.y + upValue, duration: 1)
-        let flyingActionSequence = SKAction.sequence([flyDown, .wait(forDuration: 3), flyUp, .wait(forDuration: 3)])
-        self.run(.repeatForever(flyingActionSequence))
-    }
-    
-}
-
 public class GameWorld: SKScene {
     
     enum macOSKeyMap: UInt16 {
@@ -62,9 +50,24 @@ public class GameWorld: SKScene {
         }
     }
     
+    func flying(platform: SKSpriteNode) {
+        let upValue: CGFloat = 240
+        let flyDown = SKAction.moveTo(y: platform.position.y, duration: 1)
+        let flyUp = SKAction.moveTo(y: platform.position.y - upValue, duration: 1)
+        let flyingActionSequence = SKAction.sequence([flyDown, .wait(forDuration: 3), flyUp, .wait(forDuration: 3)])
+        platform.run(.repeatForever(flyingActionSequence))
+    }
+    
     public override func didMove(to view: SKView) {
         
         let rotatePlatformActionSequence = SKAction.sequence([rotatePlatformAction(), .wait(forDuration: 2), rotatePlatformAction(), .wait(forDuration: 2)])
+        
+        enumerateChildNodes(withName: "//FlyingPlatform") {
+            node, stop in
+            if let platform = node as? SKSpriteNode {
+                self.flying(platform: platform)
+            }
+        }
         
         self.run(writingHistory())
         player = childNode(withName: "//Meep") as? SKSpriteNode
@@ -76,7 +79,6 @@ public class GameWorld: SKScene {
         cameraNode.position = .init(x: x, y: frame.midY)
         camera = cameraNode
         addChild(cameraNode)
-        
     }
     
     @objc static public override var supportsSecureCoding: Bool {
@@ -145,12 +147,6 @@ public class GameWorld: SKScene {
     #endif
     
     public override func update(_ currentTime: TimeInterval) {
-        enumerateChildNodes(withName: "//FlyingPlatform") {
-            node, stop in
-            if let piece = node as? FlyingPlatform { // Cast to Sprite if we can
-                piece.flying()
-            }
-        }
         if player.position.x < cameraNode.position.x {
             if player.position.x > -1536 {
                 cameraNode.position = .init(x: player.position.x, y: 0)
