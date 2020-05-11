@@ -161,8 +161,11 @@ public class GameWorld: SKScene {
             if player.position.x > -1536 {
                 cameraNode.position = .init(x: player.position.x, y: 0)
             }
+        } else if player.position.x > cameraNode.position.x {
+            if player.position.x < 1536 {
+                cameraNode.position = .init(x: player.position.x, y: 0)
+            }
         }
-        
     }
 }
 
