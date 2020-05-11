@@ -23,7 +23,7 @@ public class GameWorld: SKScene {
     
     public var rotatePlatform: SKSpriteNode!
     public var cameraNode: SKCameraNode!
-    public var player: SKSpriteNode!
+    public var player: Player!
     
     func writingHistory() -> SKAction {
         return SKAction.run {
@@ -70,7 +70,12 @@ public class GameWorld: SKScene {
         }
         
         self.run(writingHistory())
-        player = childNode(withName: "//Meep") as? SKSpriteNode
+        player = Player(level: "Reverse", frame: frame)
+        player.physicsBody = SKPhysicsBody(texture: player.texture!, size: player.size)
+        player.physicsBody?.affectedByGravity = true
+        player.physicsBody?.isDynamic = true
+        player.physicsBody?.allowsRotation = false
+        addChild(player)
         rotatePlatform = childNode(withName: "//RotatePlatform") as? SKSpriteNode
         rotatePlatform.run(.repeatForever(rotatePlatformActionSequence))
         
@@ -87,49 +92,18 @@ public class GameWorld: SKScene {
         }
     }
     
-    func runPlayer(level: String) {
-        let xAddValue: CGFloat = level == "Reverse" ? -30 : 30
-        // if player.position.x + xAddValue > cameraNode.position.x - 512 {
-        if player.position.x + xAddValue > frame.minX {
-            player.position.x += xAddValue
-        }
-    }
-
-    func moveBackPlayer(level: String) {
-        let xAddValue: CGFloat = level == "Reverse" ? 30 : -30
-        // if player.position.x + xAddValue < cameraNode.position.x + 512 {
-        if player.position.x + xAddValue < frame.maxX {
-            player.position.x += xAddValue
-        }
-    }
-    
-    func jumpPlayer(level: String) {
-        let yAddValue: CGFloat = level == "Reverse" ? -50 : 50
-        player.position.y += yAddValue
-    }
-
-    func squattingPlayer(level: String) {
-        player.texture = SKTexture(imageNamed: "textureSquattingReversePlayer")
-        player.yScale = 1
-    }
-    
-    func noSquattingPlayer(level: String) {
-        player.texture = SKTexture(imageNamed: "textureReversePlayer")
-        player.yScale = 2
-    }
-    
     #if os(macOS)
     public override func keyDown(with event: NSEvent) {
         let key = event.keyCode
         switch key {
         case macOSKeyMap.leftArrow.rawValue:
-            runPlayer(level: "Reverse")
+            player.runPlayer()
         case macOSKeyMap.rightArrow.rawValue:
-            moveBackPlayer(level: "Reverse")
+            player.moveBackPlayer()
         case macOSKeyMap.downArrow.rawValue:
-            jumpPlayer(level: "Reverse")
+            player.jumpPlayer()
         case macOSKeyMap.upArrow.rawValue:
-            squattingPlayer(level: "Reverse")
+            player.squattingPlayer()
         default:
             return
         }
@@ -139,7 +113,9 @@ public class GameWorld: SKScene {
         let key = event.keyCode
         switch key {
         case macOSKeyMap.upArrow.rawValue:
-            noSquattingPlayer(level: "Reverse")
+            player.noSquattingPlayer()
+        case macOSKeyMap.downArrow.rawValue:
+            player.falloffPlayer()
         default:
             return
         }
@@ -169,3 +145,4 @@ if let scene = GameWorld(fileNamed: "levelReverse") {
 }
 
 PlaygroundSupport.PlaygroundPage.current.liveView = sceneView
+
