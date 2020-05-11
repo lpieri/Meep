@@ -84,7 +84,6 @@ public class GameWorld: SKScene {
         camera = cameraNode
         addChild(cameraNode)
         
-        physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
     }
     
     @objc static public override var supportsSecureCoding: Bool {
