@@ -70,6 +70,11 @@ public class GameWorld: SKScene {
         
         let rotatePlatformActionSequence = SKAction.sequence([rotatePlatformAction(), .wait(forDuration: 2), rotatePlatformAction(), .wait(forDuration: 2)])
         
+        // let wall = childNode(withName: "//Wall1") as! SKSpriteNode
+        // print(wall.frame)
+        // wall.physicsBody = SKPhysicsBody(edgeLoopFrom: wall.frame)
+        // wall.physicsBody?.isDynamic = true
+        
         self.run(writingHistory())
         player = childNode(withName: "//Meep") as? SKSpriteNode
         rotatePlatform = childNode(withName: "//RotatePlatform") as? SKSpriteNode
@@ -94,14 +99,16 @@ public class GameWorld: SKScene {
     
     func runPlayer(level: String) {
         let xAddValue: CGFloat = level == "Reverse" ? -30 : 30
-        if player.position.x + xAddValue > cameraNode.position.x - 512 {
+        // if player.position.x + xAddValue > cameraNode.position.x - 512 {
+        if player.position.x + xAddValue > frame.minX {
             player.position.x += xAddValue
         }
     }
 
     func moveBackPlayer(level: String) {
         let xAddValue: CGFloat = level == "Reverse" ? 30 : -30
-        if player.position.x + xAddValue < cameraNode.position.x + 512 {
+        // if player.position.x + xAddValue < cameraNode.position.x + 512 {
+        if player.position.x + xAddValue < frame.maxX {
             player.position.x += xAddValue
         }
     }
