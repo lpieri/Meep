@@ -12,18 +12,6 @@ Meep is a transgender monster...
 She dreams of becoming a pink monster in the other universe.
 """
 
-public class FlyingPlatform: SKSpriteNode {
-    
-    public func flying() {
-        let upValue: CGFloat = 240
-        let flyDown = SKAction.moveTo(y: self.position.y - upValue, duration: 1)
-        let flyUp = SKAction.moveTo(y: self.position.y + upValue, duration: 1)
-        let flyingActionSequence = SKAction.sequence([flyDown, .wait(forDuration: 3), flyUp, .wait(forDuration: 3)])
-        self.run(.repeatForever(flyingActionSequence))
-    }
-    
-}
-
 public class GameWorld: SKScene {
     
     enum macOSKeyMap: UInt16 {
@@ -64,7 +52,6 @@ public class GameWorld: SKScene {
     
     func flying(platform: SKSpriteNode) {
         let upValue: CGFloat = 240
-        print(platform.position)
         let flyDown = SKAction.moveTo(y: platform.position.y, duration: 1)
         let flyUp = SKAction.moveTo(y: platform.position.y - upValue, duration: 1)
         let flyingActionSequence = SKAction.sequence([flyDown, .wait(forDuration: 3), flyUp, .wait(forDuration: 3)])
@@ -160,7 +147,6 @@ public class GameWorld: SKScene {
     #endif
     
     public override func update(_ currentTime: TimeInterval) {
-        
         if player.position.x < cameraNode.position.x {
             if player.position.x > -1536 {
                 cameraNode.position = .init(x: player.position.x, y: 0)
