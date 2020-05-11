@@ -15,7 +15,7 @@ public class Player: SKSpriteNode {
         self.levelTexture = level
         self.runValue = level == "Reverse" ? -30 : 30
         self.moveBackValue = self.runValue * -1
-        self.jumpValue = level == "Reverse" ? -50 : 50
+        self.jumpValue = level == "Reverse" ? -60 : 60
         self.numberOfJump = 0
         self.numberOfLife = 3
         let xPosition = 1980
