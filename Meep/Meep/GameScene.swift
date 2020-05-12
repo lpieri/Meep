@@ -18,6 +18,16 @@ class GameScene: SKScene {
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
     
+    override init() {
+        let size = CGSize(width: 4096, height: 768)
+        super.init(size: size)
+        self.frame = CGRect(x: -2048, y: -384, width: 4096, height: 768)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func sceneDidLoad() {
         
         self.lastUpdateTime = 0
