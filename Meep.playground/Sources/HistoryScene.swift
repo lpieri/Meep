@@ -32,7 +32,6 @@ public class HistoryScene: SKScene {
         #elseif os(iOS)
         continueMessage = "Touch the screen to continue..."
         #endif
-        // color 64, 68, 69
         let size = CGSize(width: 1024, height: 768)
         self.currentLevel = level
         self.label = SKLabelNode(text: self.continueMessage)
@@ -75,7 +74,7 @@ public class HistoryScene: SKScene {
     public override func keyDown(with event: NSEvent) {
         let key = event.keyCode
         switch key {
-        case 49:
+        case macOSKeyMap.space.rawValue:
             self.changeScene(level: "Reverse")
         default:
             print(key)

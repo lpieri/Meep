@@ -40,7 +40,7 @@ public class StartGame: SKScene {
     public override func keyDown(with event: NSEvent) {
         let key = event.keyCode
         switch key {
-        case 49:
+        case macOSKeyMap.space.rawValue:
             self.changeScene(level: "Reverse")
         default:
             print(key)

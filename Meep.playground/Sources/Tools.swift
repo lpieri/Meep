@@ -5,4 +5,5 @@ enum macOSKeyMap: UInt16 {
     case rightArrow = 124
     case upArrow = 126
     case downArrow = 125
+    case space = 49
 }
