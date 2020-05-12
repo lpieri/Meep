@@ -8,6 +8,7 @@ public class Player: SKSpriteNode {
     private let jumpValue: CGFloat
     private var numberOfJump: Int
     public var numberOfLife: Int
+    public var getKey: Bool
     public let parentFrame: CGRect
     
     public init(level: String, frame: CGRect) {
@@ -18,6 +19,7 @@ public class Player: SKSpriteNode {
         self.jumpValue = level == "Reverse" ? -60 : 60
         self.numberOfJump = 0
         self.numberOfLife = 3
+        self.getKey = false
         let xPosition = 1980
         let size = CGSize(width: 20, height: 29)
         var texture: SKTexture

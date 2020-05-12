@@ -29,9 +29,6 @@ public class StartGame: SKScene {
     public override func didMove(to view: SKView) {
         let labelActionSequence = SKAction.sequence([.fadeIn(withDuration: 1), .fadeOut(withDuration: 1)])
         self.label.run(.repeatForever(labelActionSequence))
-        print(frame)
-        print(view.bounds)
-        print(self.size)
     }
     
     public func changeScene(level: String) {

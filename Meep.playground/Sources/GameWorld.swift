@@ -9,7 +9,7 @@ Meep is a transgender monster...
 She dreams of becoming a pink monster in the other universe.
 """
 
-public class GameWorld: SKScene {
+public class GameWorld: SKScene, SKPhysicsContactDelegate {
     
     enum macOSKeyMap: UInt16 {
         case leftArrow = 123
@@ -18,9 +18,65 @@ public class GameWorld: SKScene {
         case downArrow = 125
     }
     
+    public var key: SKSpriteNode!
     public var rotatePlatform: SKSpriteNode!
     public var cameraNode: SKCameraNode!
     public var player: Player!
+    
+    public override func didMove(to view: SKView) {
+        
+        self.size = CGSize(width: 4096, height: 768)
+        self.scaleMode = .aspectFill
+        self.physicsWorld.contactDelegate = self
+        
+        let rotatePlatformActionSequence = SKAction.sequence([rotatePlatformAction(), .wait(forDuration: 2), rotatePlatformAction(), .wait(forDuration: 2)])
+        
+        enumerateChildNodes(withName: "//FlyingPlatform") {
+            node, stop in
+            if let platform = node as? SKSpriteNode {
+                self.flying(platform: platform)
+            }
+        }
+        
+        self.run(writingHistory())
+        player = Player(level: "Reverse", frame: frame)
+        player.physicsBody = SKPhysicsBody(texture: player.texture!, size: player.size)
+        player.physicsBody?.affectedByGravity = true
+        player.physicsBody?.isDynamic = true
+        player.physicsBody?.allowsRotation = false
+        player.physicsBody?.categoryBitMask = 1
+        player.physicsBody?.contactTestBitMask = 15
+        addChild(player)
+        
+        rotatePlatform = childNode(withName: "//RotatePlatform") as? SKSpriteNode
+        rotatePlatform.run(.repeatForever(rotatePlatformActionSequence))
+        
+        key = childNode(withName: "//Key") as? SKSpriteNode
+        
+        cameraNode = SKCameraNode()
+        let x = (size.width / 2) - (view.bounds.width / 2)
+        cameraNode.position = .init(x: x, y: frame.midY)
+        camera = cameraNode
+        addChild(cameraNode)
+        
+    }
+    
+    public func didBegin(_ contact: SKPhysicsContact) {
+        if let name = contact.bodyA.node?.name {
+            if name == "Key" {
+                player.getKey = true
+                key.isHidden = true
+            } else if name == "NormalTree" && player.getKey == true {
+                let finalScene = StartGame()
+                self.scene?.view?.presentScene(finalScene, transition: .fade(withDuration: 1))
+            } else {
+                print(name)
+            }
+        }
+//
+//        print(contact.bodyB)
+//        print(contact.bodyA)
+    }
     
     func writingHistory() -> SKAction {
         return SKAction.run {
@@ -53,40 +109,6 @@ public class GameWorld: SKScene {
         let flyUp = SKAction.moveTo(y: platform.position.y - upValue, duration: 1)
         let flyingActionSequence = SKAction.sequence([flyDown, .wait(forDuration: 3), flyUp, .wait(forDuration: 3)])
         platform.run(.repeatForever(flyingActionSequence))
-    }
-    
-    public override func didMove(to view: SKView) {
-        
-        self.size = CGSize(width: 4096, height: 768)
-        self.scaleMode = .aspectFill
-        
-        let rotatePlatformActionSequence = SKAction.sequence([rotatePlatformAction(), .wait(forDuration: 2), rotatePlatformAction(), .wait(forDuration: 2)])
-
-        enumerateChildNodes(withName: "//FlyingPlatform") {
-            node, stop in
-            if let platform = node as? SKSpriteNode {
-                self.flying(platform: platform)
-            }
-        }
-        
-        self.run(writingHistory())
-        player = Player(level: "Reverse", frame: frame)
-        player.physicsBody = SKPhysicsBody(texture: player.texture!, size: player.size)
-        player.physicsBody?.affectedByGravity = true
-        player.physicsBody?.isDynamic = true
-        player.physicsBody?.allowsRotation = false
-        addChild(player)
-        rotatePlatform = childNode(withName: "//RotatePlatform") as? SKSpriteNode
-        rotatePlatform.run(.repeatForever(rotatePlatformActionSequence))
-        
-        print(frame)
-        print(view.bounds)
-        print(self.size)
-        cameraNode = SKCameraNode()
-        let x = (size.width / 2) - (view.bounds.width / 2)
-        cameraNode.position = .init(x: x, y: frame.midY)
-        camera = cameraNode
-        addChild(cameraNode)
     }
     
     @objc static public override var supportsSecureCoding: Bool {
