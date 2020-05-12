@@ -1,4 +1,5 @@
 import SpriteKit
+
 public class StartGame: SKScene {
     
     private let startMessage: String
