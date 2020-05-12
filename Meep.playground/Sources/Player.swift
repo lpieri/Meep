@@ -31,7 +31,7 @@ public class Player: SKSpriteNode {
             texture = SKTexture(imageNamed: "texture\(self.levelTexture)Player")
         } else {
             rotate = 0
-            position = CGPoint(x: xPosition * -1, y: 291)
+            position = CGPoint(x: xPosition * -1, y: -291)
             texture = SKTexture(imageNamed: "texture\(self.levelTexture)Player")
         }
         super.init(texture: texture, color: .clear, size: size)
@@ -47,14 +47,27 @@ public class Player: SKSpriteNode {
     }
     
     public func runPlayer() {
-        if self.position.x + self.runValue > self.parentFrame.minX {
-            self.position.x += self.runValue
+        if levelTexture == "Reverse" {
+            if self.position.x + self.runValue > self.parentFrame.minX {
+                self.position.x += self.runValue
+            }
+        } else if levelTexture == "Normal" {
+            if self.position.x + self.runValue < self.parentFrame.maxX {
+                self.position.x += self.runValue
+            }
         }
+        
     }
 
     public func moveBackPlayer() {
-        if self.position.x + self.moveBackValue < self.parentFrame.maxX {
-            self.position.x += self.moveBackValue
+        if levelTexture == "Reverse" {
+            if self.position.x + self.moveBackValue < self.parentFrame.maxX {
+                self.position.x += self.moveBackValue
+            }
+        } else if levelTexture == "Normal" {
+            if self.position.x + self.moveBackValue > self.parentFrame.minX {
+                self.position.x += self.moveBackValue
+            }
         }
     }
     

@@ -32,8 +32,8 @@ public class StartGame: SKScene {
     }
     
     public func changeScene(level: String) {
-        let gameScene = GameWorld(fileNamed: "levelReverse")
-        self.scene?.view?.presentScene(gameScene!, transition: .fade(withDuration: 1))
+        let gameScene = ReverseWorld(fileNamed: "levelReverse")!
+        self.scene?.view?.presentScene(gameScene, transition: .fade(withDuration: 1))
     }
     
     #if os(macOS)
