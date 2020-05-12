@@ -17,7 +17,7 @@ Meep found the temporal rift and arrived in the universe of the pink monsters.
 
 But Meep's adventure had just begun...
 Meep must now integrate into the world of the pink monsters.
-For this, Meep will have to make a transition to become a pink monster too.
+For this, Meep will have to make a blend to become a pink monster too.
 """
 
 public class HistoryScene: SKScene {
