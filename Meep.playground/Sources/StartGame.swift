@@ -11,7 +11,7 @@ public class StartGame: SKScene {
         #elseif os(iOS)
         startMessage = "Touch the screen to start..."
         #endif
-        let size = CGSize(width: 4096, height: 768)
+        let size = CGSize(width: 1024, height: 768)
         self.label = SKLabelNode(text: self.startMessage)
         let logo = SKSpriteNode(imageNamed: "textureLogo")
         super.init(size: size)
@@ -32,8 +32,8 @@ public class StartGame: SKScene {
     }
     
     public func changeScene(level: String) {
-        let gameScene = ReverseWorld(fileNamed: "levelReverse")!
-        self.scene?.view?.presentScene(gameScene, transition: .fade(withDuration: 1))
+        let newScene = HistoryScene(level: "Reverse")
+        self.scene?.view?.presentScene(newScene, transition: .fade(withDuration: 1))
     }
     
     #if os(macOS)
@@ -51,5 +51,5 @@ public class StartGame: SKScene {
         self.changeScene(level: "Reverse")
     }
     #endif
-    
+
 }

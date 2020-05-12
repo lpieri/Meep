@@ -1,14 +1,5 @@
 import SpriteKit
 
-let historyText = """
-Meep is a little blue monster,
-he lives in a universe where all monsters are blue,
-but Meep is not a monster like the others...
-
-Meep is a transgender monster...
-She dreams of becoming a pink monster in the other universe.
-"""
-
 public class ReverseWorld: SKScene, SKPhysicsContactDelegate {
 
     public var key: SKSpriteNode!
@@ -30,8 +21,7 @@ public class ReverseWorld: SKScene, SKPhysicsContactDelegate {
                 self.flying(platform: platform)
             }
         }
-        
-        self.run(writingHistory())
+
         player = Player(level: "Reverse", frame: frame)
         player.physicsBody = SKPhysicsBody(texture: player.texture!, size: player.size)
         player.physicsBody?.affectedByGravity = true
@@ -60,26 +50,9 @@ public class ReverseWorld: SKScene, SKPhysicsContactDelegate {
                 player.getKey = true
                 key.isHidden = true
             } else if name == "NormalTree" && player.getKey == true {
-                let finalScene = NormalWorld(fileNamed: "levelNormal")!
-                self.scene?.view?.presentScene(finalScene, transition: .fade(withDuration: 1))
+                let newScene = HistoryScene(level: "Normal")
+                self.scene?.view?.presentScene(newScene, transition: .fade(withDuration: 1))
             }
-        }
-    }
-    
-    func writingHistory() -> SKAction {
-        return SKAction.run {
-            let text = SKLabelNode(text: historyText)
-            text.lineBreakMode = .byCharWrapping
-            text.numberOfLines = 3
-            text.color = .white
-            text.alpha = 0.0
-            text.fontSize = 21
-            text.position = .init(x: self.frame.maxX - 265, y: self.frame.minY + 100)
-            let appear = SKAction.fadeIn(withDuration: 1)
-            let disappear = SKAction.fadeOut(withDuration: 1)
-            let textPrintActionSequence = SKAction.sequence([appear, .wait(forDuration: 10), disappear])
-            self.addChild(text)
-            text.run(textPrintActionSequence)
         }
     }
         
