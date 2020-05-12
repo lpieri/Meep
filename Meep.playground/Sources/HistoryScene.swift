@@ -32,10 +32,12 @@ public class HistoryScene: SKScene {
         #elseif os(iOS)
         continueMessage = "Touch the screen to continue..."
         #endif
+        // color 64, 68, 69
         let size = CGSize(width: 1024, height: 768)
         self.currentLevel = level
         self.label = SKLabelNode(text: self.continueMessage)
         super.init(size: size)
+        self.backgroundColor = .init(red: 64 / 255, green: 68 / 255, blue: 69 / 255, alpha: 1)
         self.scaleMode = .aspectFill
         self.label.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 300)
         self.label.alpha = 0
