@@ -61,7 +61,7 @@ public class ReverseWorld: SKScene, SKPhysicsContactDelegate {
                 self.scene?.view?.presentScene(newScene, transition: .fade(withDuration: 1))
             } else if name == "Spade" {
                 if player.numberOfLife - 1 == 0 {
-                    let newScene = GameOver()
+                    let newScene = GameOver(level: "Reverse")
                     self.scene?.view?.presentScene(newScene, transition: .fade(withDuration: 1))
                 } else {
                     let heart = childNode(withName: "//Heart\(player.numberOfLife)") as! SKSpriteNode

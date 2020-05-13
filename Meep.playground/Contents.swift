@@ -7,7 +7,7 @@ let Width = 1024
 let Height = 768
 
 let sceneView = SKView(frame: CGRect(x:0 , y:0, width: Width, height: Height))
-let scene = Credits()
+let scene = StartGame()
 scene.scaleMode = .aspectFill
 sceneView.presentScene(scene)
 

@@ -91,7 +91,7 @@ public class Player: SKSpriteNode {
     }
     
     public func noSquattingPlayer() {
-        self.texture = SKTexture(imageNamed: "texture\(self.levelTexture)Player")
+        self.texture = SKTexture(imageNamed: "textureReversePlayer")
         self.yScale = 2
     }
     

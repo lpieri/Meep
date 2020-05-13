@@ -57,7 +57,7 @@ public class NormalWorld: SKScene, SKPhysicsContactDelegate {
         if let name = contact.bodyA.node?.name {
             if name == "Spade" {
                 if player.numberOfLife - 1 == 0 {
-                    let newScene = GameOver()
+                    let newScene = GameOver(level: "Normal")
                     self.scene?.view?.presentScene(newScene, transition: .fade(withDuration: 1))
                 } else {
                     let heart = childNode(withName: "//Heart\(player.numberOfLife)") as! SKSpriteNode
