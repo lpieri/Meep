@@ -9,6 +9,7 @@ public class Player: SKSpriteNode {
     private var numberOfJump: Int
     public var numberOfLife: Int
     public var getKey: Bool
+    public var duringAnimation: Bool
     public let parentFrame: CGRect
     
     public init(level: String, frame: CGRect) {
@@ -16,10 +17,11 @@ public class Player: SKSpriteNode {
         self.levelTexture = level
         self.runValue = level == "Reverse" ? -30 : 30
         self.moveBackValue = self.runValue * -1
-        self.jumpValue = level == "Reverse" ? -60 : 60
+        self.jumpValue = level == "Reverse" ? -90 : 90
         self.numberOfJump = 0
         self.numberOfLife = 3
         self.getKey = false
+        self.duringAnimation = false
         let xPosition = 1980
         var texture: SKTexture
         var position: CGPoint
@@ -46,32 +48,35 @@ public class Player: SKSpriteNode {
     }
     
     public func runPlayer() {
-        if levelTexture == "Reverse" {
-            if self.position.x + self.runValue > self.parentFrame.minX {
-                self.position.x += self.runValue
-            }
-        } else if levelTexture == "Normal" {
-            if self.position.x + self.runValue < self.parentFrame.maxX {
-                self.position.x += self.runValue
+        if self.duringAnimation == false {
+            if levelTexture == "Reverse" {
+                if self.position.x + self.runValue > self.parentFrame.minX {
+                    self.position.x += self.runValue
+                }
+            } else if levelTexture == "Normal" {
+                if self.position.x + self.runValue < self.parentFrame.maxX {
+                    self.position.x += self.runValue
+                }
             }
         }
-        
     }
 
     public func moveBackPlayer() {
-        if levelTexture == "Reverse" {
-            if self.position.x + self.moveBackValue < self.parentFrame.maxX {
-                self.position.x += self.moveBackValue
-            }
-        } else if levelTexture == "Normal" {
-            if self.position.x + self.moveBackValue > self.parentFrame.minX {
-                self.position.x += self.moveBackValue
+        if self.duringAnimation == false {
+            if levelTexture == "Reverse" {
+                if self.position.x + self.moveBackValue < self.parentFrame.maxX {
+                    self.position.x += self.moveBackValue
+                }
+            } else if levelTexture == "Normal" {
+                if self.position.x + self.moveBackValue > self.parentFrame.minX {
+                    self.position.x += self.moveBackValue
+                }
             }
         }
     }
     
     public func jumpPlayer() {
-        if self.numberOfJump < 2 {
+        if self.numberOfJump < 2 && self.duringAnimation == false {
             self.position.y += jumpValue
             self.numberOfJump += 1
         }
