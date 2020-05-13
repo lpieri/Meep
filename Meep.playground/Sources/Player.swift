@@ -21,7 +21,6 @@ public class Player: SKSpriteNode {
         self.numberOfLife = 3
         self.getKey = false
         let xPosition = 1980
-        let size = CGSize(width: 20, height: 29)
         var texture: SKTexture
         var position: CGPoint
         var rotate: CGFloat
@@ -34,7 +33,7 @@ public class Player: SKSpriteNode {
             position = CGPoint(x: xPosition * -1, y: -291)
             texture = SKTexture(imageNamed: "texture\(self.levelTexture)Player")
         }
-        super.init(texture: texture, color: .clear, size: size)
+        super.init(texture: texture, color: .clear, size: CGSize(width: 20, height: 29))
         self.xScale = 2
         self.yScale = 2
         self.position = position

@@ -11,10 +11,9 @@ public class StartGame: SKScene {
         #elseif os(iOS)
         startMessage = "Touch the screen to start..."
         #endif
-        let size = CGSize(width: 1024, height: 768)
         self.label = SKLabelNode(text: self.startMessage)
         let logo = SKSpriteNode(imageNamed: "textureLogo")
-        super.init(size: size)
+        super.init(size: CGSize(width: 1024, height: 768))
         logo.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2)
         self.label.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 300)
         self.label.alpha = 0
