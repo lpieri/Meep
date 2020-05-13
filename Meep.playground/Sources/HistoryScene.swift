@@ -63,8 +63,7 @@ public class HistoryScene: SKScene {
     public func changeScene(level: String) {
         var newScene: SKScene
         if currentLevel == "Reverse" {
-            // newScene = ReverseWorld(fileNamed: "levelReverse")!
-            newScene = NormalWorld(fileNamed: "levelNormal")!
+             newScene = ReverseWorld(fileNamed: "levelReverse")!
         } else {
             newScene = NormalWorld(fileNamed: "levelNormal")!
         }

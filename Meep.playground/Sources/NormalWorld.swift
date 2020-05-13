@@ -60,7 +60,9 @@ public class NormalWorld: SKScene, SKPhysicsContactDelegate {
                     let newScene = GameOver()
                     self.scene?.view?.presentScene(newScene, transition: .fade(withDuration: 1))
                 } else {
+                    let heart = childNode(withName: "//Heart\(player.numberOfLife)") as! SKSpriteNode
                     player.numberOfLife -= 1
+                    heart.isHidden = true
                 }
             } else if name == "Button" {
                 player.duringAnimation = true
@@ -73,6 +75,9 @@ public class NormalWorld: SKScene, SKPhysicsContactDelegate {
                     self.cameraNode.run(returnCamera)
                     self.player.duringAnimation = false
                 }
+            } else if name == "NewSkin" {
+                let newScene = Credits()
+                self.scene?.view?.presentScene(newScene, transition: .fade(withDuration: 1))
             }
         }
     }
@@ -97,6 +102,22 @@ public class NormalWorld: SKScene, SKPhysicsContactDelegate {
         }
         platform.run(.repeatForever(flyingActionSequence))
     }
+    
+    func moveHeart() {
+        let heart1 = childNode(withName: "//Heart1") as! SKSpriteNode
+        let heart2 = childNode(withName: "//Heart2") as! SKSpriteNode
+        let heart3 = childNode(withName: "//Heart3") as! SKSpriteNode
+        if heart1.isHidden == false {
+            heart1.position.x = (cameraNode.position.x - 512 + 118)
+        }
+        if heart2.isHidden == false {
+            heart2.position.x = heart1.position.x + 90
+        }
+        if heart3.isHidden == false {
+            heart3.position.x = heart2.position.x + 90
+        }
+    }
+
     
     @objc static public override var supportsSecureCoding: Bool {
         get {
@@ -138,10 +159,12 @@ public class NormalWorld: SKScene, SKPhysicsContactDelegate {
         if player.position.x < cameraNode.position.x {
             if player.position.x > -1536 {
                 cameraNode.position = .init(x: player.position.x, y: 0)
+                moveHeart()
             }
         } else if player.position.x > cameraNode.position.x {
             if player.position.x < 1536 {
                 cameraNode.position = .init(x: player.position.x, y: 0)
+                moveHeart()
             }
         }
     }
