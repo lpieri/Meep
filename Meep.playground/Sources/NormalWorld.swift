@@ -64,11 +64,12 @@ public class NormalWorld: SKScene, SKPhysicsContactDelegate {
                     player.numberOfLife -= 1
                     heart.isHidden = true
                 }
-            } else if name == "Button" {
+            } else if name == "Button" && player.getKey == false {
+                player.getKey = true
                 player.duringAnimation = true
                 let moveCamera = SKAction.moveTo(x: door.position.x, duration: 0.5)
                 cameraNode.run(moveCamera)
-                let openDoor = SKAction.moveTo(y: door.position.y + 41, duration: 1)
+                let openDoor = SKAction.moveTo(y: door.position.y + 135, duration: 1)
                 door.run(openDoor)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     let returnCamera = SKAction.moveTo(x: 1536, duration: 0.5)

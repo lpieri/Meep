@@ -29,12 +29,11 @@ public class Player: SKSpriteNode {
         if level == "Reverse" {
             position = CGPoint(x: xPosition, y: 291)
             rotate = .pi / 1
-            texture = SKTexture(imageNamed: "texture\(self.levelTexture)Player")
         } else {
             rotate = 0
             position = CGPoint(x: xPosition * -1, y: -291)
-            texture = SKTexture(imageNamed: "texture\(self.levelTexture)Player")
         }
+        texture = SKTexture(imageNamed: "textureReversePlayer")
         super.init(texture: texture, color: .clear, size: CGSize(width: 20, height: 29))
         self.xScale = 2
         self.yScale = 2
@@ -87,7 +86,7 @@ public class Player: SKSpriteNode {
     }
 
     public func squattingPlayer() {
-        self.texture = SKTexture(imageNamed: "textureSquatting\(self.levelTexture)Player")
+        self.texture = SKTexture(imageNamed: "textureSquattingReversePlayer")
         self.yScale = 1
     }
     
