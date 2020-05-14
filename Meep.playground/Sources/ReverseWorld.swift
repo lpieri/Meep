@@ -7,6 +7,7 @@ public class ReverseWorld: SKScene, SKPhysicsContactDelegate {
     public var rotatePlatform: SKSpriteNode!
     public var cameraNode: SKCameraNode!
     public var player: Player!
+    private var previousPlayerPositionX: CGFloat!
     
     public override func didMove(to view: SKView) {
         
@@ -19,10 +20,49 @@ public class ReverseWorld: SKScene, SKPhysicsContactDelegate {
         enumerateChildNodes(withName: "//FlyingPlatform") {
             node, stop in
             if let platform = node as? SKSpriteNode {
+                platform.physicsBody = .init(rectangleOf: platform.size)
+                platform.physicsBody?.isDynamic = false
+                platform.physicsBody?.affectedByGravity = false
+                platform.physicsBody?.allowsRotation = false
+                platform.physicsBody?.usesPreciseCollisionDetection = true
+                platform.physicsBody?.categoryBitMask = categoryMask.wall.rawValue
+                platform.physicsBody?.collisionBitMask = categoryMask.player.rawValue
+                platform.physicsBody?.contactTestBitMask = 0x00000000
+                platform.physicsBody?.density = 100
                 self.flying(platform: platform)
             }
         }
 
+        enumerateChildNodes(withName: "//Wall") {
+            node, stop in
+            if let wall = node as? SKSpriteNode {
+                wall.physicsBody = .init(rectangleOf: wall.size)
+                wall.physicsBody?.isDynamic = false
+                wall.physicsBody?.affectedByGravity = false
+                wall.physicsBody?.allowsRotation = false
+                wall.physicsBody?.usesPreciseCollisionDetection = true
+                wall.physicsBody?.categoryBitMask = categoryMask.wall.rawValue
+                wall.physicsBody?.collisionBitMask = categoryMask.player.rawValue
+                wall.physicsBody?.contactTestBitMask = 0x00000000
+                wall.physicsBody?.density = 100
+            }
+        }
+        
+        enumerateChildNodes(withName: "//Mountain") {
+            node, stop in
+            if let mountain = node as? SKSpriteNode {
+                mountain.physicsBody = .init(rectangleOf: mountain.size)
+                mountain.physicsBody?.isDynamic = false
+                mountain.physicsBody?.affectedByGravity = false
+                mountain.physicsBody?.allowsRotation = false
+                mountain.physicsBody?.usesPreciseCollisionDetection = true
+                mountain.physicsBody?.categoryBitMask = categoryMask.wall.rawValue
+                mountain.physicsBody?.collisionBitMask = categoryMask.player.rawValue
+                mountain.physicsBody?.contactTestBitMask = 0x00000000
+                mountain.physicsBody?.density = 100
+            }
+        }
+        
         normalTree = childNode(withName: "//NormalTree") as? SKSpriteNode
 
         player = Player(level: "Reverse", frame: frame)
@@ -30,10 +70,14 @@ public class ReverseWorld: SKScene, SKPhysicsContactDelegate {
         player.physicsBody?.affectedByGravity = true
         player.physicsBody?.isDynamic = true
         player.physicsBody?.allowsRotation = false
-        player.physicsBody?.categoryBitMask = 1
-        player.physicsBody?.contactTestBitMask = 15
+        player.physicsBody?.usesPreciseCollisionDetection = true
+        player.physicsBody?.categoryBitMask = categoryMask.player.rawValue
+        player.physicsBody?.collisionBitMask = 0x0000001E
+        player.physicsBody?.contactTestBitMask = categoryMask.spade.rawValue | categoryMask.goal.rawValue
         addChild(player)
         
+        previousPlayerPositionX = player.position.x
+
         rotatePlatform = childNode(withName: "//RotatePlatform") as? SKSpriteNode
         rotatePlatform.run(.repeatForever(rotatePlatformActionSequence))
         
@@ -140,16 +184,19 @@ public class ReverseWorld: SKScene, SKPhysicsContactDelegate {
     #endif
     
     public override func update(_ currentTime: TimeInterval) {
-        if player.position.x < cameraNode.position.x {
-            if player.position.x > -1536 {
+        if player.position.x - previousPlayerPositionX < -27 {
+            if  player.position.x > -1536 && player.position.x < cameraNode.position.x {
+                previousPlayerPositionX = player.position.x
                 cameraNode.position = .init(x: player.position.x, y: 0)
                 moveHeart()
             }
-        } else if player.position.x > cameraNode.position.x {
-            if player.position.x < 1536 {
+        } else if player.position.x - previousPlayerPositionX > 27 {
+            if player.position.x < 1536 && player.position.x > cameraNode.position.x {
+                previousPlayerPositionX = player.position.x
                 cameraNode.position = .init(x: player.position.x, y: 0)
                 moveHeart()
             }
         }
     }
+    
 }

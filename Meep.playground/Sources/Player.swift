@@ -3,7 +3,7 @@ import SpriteKit
 public class Player: SKSpriteNode {
     
     private let levelTexture: String
-    private let runValue: CGFloat
+    public let runValue: CGFloat
     private let moveBackValue: CGFloat
     private let jumpValue: CGFloat
     private var numberOfJump: Int
