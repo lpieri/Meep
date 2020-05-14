@@ -77,7 +77,7 @@ public class HistoryScene: SKScene {
         case macOSKeyMap.space.rawValue:
             self.changeScene(level: "Reverse")
         default:
-            print(key)
+            return
         }
     }
     #elseif os(iOS)

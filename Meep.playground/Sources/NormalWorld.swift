@@ -22,6 +22,15 @@ public class NormalWorld: SKScene, SKPhysicsContactDelegate {
         enumerateChildNodes(withName: "//FlyingPlatformDown") {
             node, stop in
             if let platform = node as? SKSpriteNode {
+                platform.physicsBody = .init(rectangleOf: platform.size)
+                platform.physicsBody?.isDynamic = false
+                platform.physicsBody?.affectedByGravity = false
+                platform.physicsBody?.allowsRotation = false
+                platform.physicsBody?.usesPreciseCollisionDetection = true
+                platform.physicsBody?.categoryBitMask = categoryMask.flyingPlatform.rawValue
+                platform.physicsBody?.collisionBitMask = categoryMask.player.rawValue
+                platform.physicsBody?.contactTestBitMask = 0x00000000
+                platform.physicsBody?.density = 100
                 self.flying(platform: platform, direction: "Down")
             }
         }
@@ -29,10 +38,34 @@ public class NormalWorld: SKScene, SKPhysicsContactDelegate {
         enumerateChildNodes(withName: "//FlyingPlatformUp") {
             node, stop in
             if let platform = node as? SKSpriteNode {
+                platform.physicsBody = .init(rectangleOf: platform.size)
+                platform.physicsBody?.isDynamic = false
+                platform.physicsBody?.affectedByGravity = false
+                platform.physicsBody?.allowsRotation = false
+                platform.physicsBody?.usesPreciseCollisionDetection = true
+                platform.physicsBody?.categoryBitMask = categoryMask.flyingPlatform.rawValue
+                platform.physicsBody?.collisionBitMask = categoryMask.player.rawValue
+                platform.physicsBody?.contactTestBitMask = 0x00000000
+                platform.physicsBody?.density = 100
                 self.flying(platform: platform, direction: "Up")
             }
         }
 
+        enumerateChildNodes(withName: "//Wall") {
+            node, stop in
+            if let wall = node as? SKSpriteNode {
+                wall.physicsBody = .init(rectangleOf: wall.size)
+                wall.physicsBody?.isDynamic = false
+                wall.physicsBody?.affectedByGravity = false
+                wall.physicsBody?.allowsRotation = false
+                wall.physicsBody?.usesPreciseCollisionDetection = true
+                wall.physicsBody?.categoryBitMask = categoryMask.wall.rawValue
+                wall.physicsBody?.collisionBitMask = categoryMask.player.rawValue
+                wall.physicsBody?.contactTestBitMask = 0x00000000
+                wall.physicsBody?.density = 100
+            }
+        }
+        
         
         door = childNode(withName: "//Door") as? SKSpriteNode
         
@@ -41,8 +74,10 @@ public class NormalWorld: SKScene, SKPhysicsContactDelegate {
         player.physicsBody?.affectedByGravity = true
         player.physicsBody?.isDynamic = true
         player.physicsBody?.allowsRotation = false
-        player.physicsBody?.categoryBitMask = 1
-        player.physicsBody?.contactTestBitMask = 15
+        player.physicsBody?.usesPreciseCollisionDetection = true
+        player.physicsBody?.categoryBitMask = categoryMask.player.rawValue
+        player.physicsBody?.collisionBitMask = 0x0000001E
+        player.physicsBody?.contactTestBitMask = categoryMask.spade.rawValue | categoryMask.goal.rawValue
         addChild(player)
         
         cameraNode = SKCameraNode()
@@ -67,14 +102,18 @@ public class NormalWorld: SKScene, SKPhysicsContactDelegate {
             } else if name == "Button" && player.getKey == false {
                 player.getKey = true
                 player.duringAnimation = true
-                let moveCamera = SKAction.moveTo(x: door.position.x, duration: 0.5)
+                let moveCamera = SKAction.moveTo(x: door.position.x, duration: 1)
                 cameraNode.run(moveCamera)
-                let openDoor = SKAction.moveTo(y: door.position.y + 135, duration: 1)
-                door.run(openDoor)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    let returnCamera = SKAction.moveTo(x: 1536, duration: 0.5)
-                    self.cameraNode.run(returnCamera)
-                    self.player.duringAnimation = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    let openDoor = SKAction.moveTo(y: self.door.position.y + 135, duration: 1)
+                    self.door.run(openDoor)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        let returnCamera = SKAction.moveTo(x: 1536, duration: 1)
+                        self.cameraNode.run(returnCamera)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            self.player.duringAnimation = false
+                        }
+                    }
                 }
             } else if name == "NewSkin" {
                 let newScene = Credits()

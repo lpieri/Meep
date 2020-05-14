@@ -2,7 +2,7 @@ import SpriteKit
 
 public class ReverseWorld: SKScene, SKPhysicsContactDelegate {
 
-    public var normalTree: SKSpriteNode!
+    public var timeRift: SKSpriteNode!
     public var key: SKSpriteNode!
     public var rotatePlatform: SKSpriteNode!
     public var cameraNode: SKCameraNode!
@@ -25,7 +25,7 @@ public class ReverseWorld: SKScene, SKPhysicsContactDelegate {
                 platform.physicsBody?.affectedByGravity = false
                 platform.physicsBody?.allowsRotation = false
                 platform.physicsBody?.usesPreciseCollisionDetection = true
-                platform.physicsBody?.categoryBitMask = categoryMask.wall.rawValue
+                platform.physicsBody?.categoryBitMask = categoryMask.flyingPlatform.rawValue
                 platform.physicsBody?.collisionBitMask = categoryMask.player.rawValue
                 platform.physicsBody?.contactTestBitMask = 0x00000000
                 platform.physicsBody?.density = 100
@@ -63,7 +63,7 @@ public class ReverseWorld: SKScene, SKPhysicsContactDelegate {
             }
         }
         
-        normalTree = childNode(withName: "//NormalTree") as? SKSpriteNode
+        timeRift = childNode(withName: "//TimeRift") as? SKSpriteNode
 
         player = Player(level: "Reverse", frame: frame)
         player.physicsBody = SKPhysicsBody(texture: player.texture!, size: player.size)
@@ -97,10 +97,20 @@ public class ReverseWorld: SKScene, SKPhysicsContactDelegate {
                 player.getKey = true
                 key.isHidden = true
                 player.duringAnimation = true
-                let moveCamera = SKAction.sequence([.moveTo(x: -1536, duration: 2.5), .moveTo(x: cameraNode.position.x, duration: 2.5)])
+                let moveCamera = SKAction.moveTo(x: -1536, duration: 1)
                 cameraNode.run(moveCamera)
-                player.duringAnimation = false
-            } else if name == "NormalTree" && player.getKey == true {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    let fadeInTimeRift = SKAction.fadeIn(withDuration: 1)
+                    self.timeRift.run(fadeInTimeRift)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        let returnCamera = SKAction.moveTo(x: self.player.position.x, duration: 1)
+                        self.cameraNode.run(returnCamera)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            self.player.duringAnimation = false
+                        }
+                    }
+                }
+            } else if name == "TimeRift" && player.getKey == true {
                 let newScene = HistoryScene(level: "Normal")
                 self.scene?.view?.presentScene(newScene, transition: .fade(withDuration: 1))
             } else if name == "Spade" {
