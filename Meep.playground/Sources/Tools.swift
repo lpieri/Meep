@@ -1,6 +1,8 @@
 import Foundation
 
 enum macOSKeyMap: UInt16 {
+    case touchZ = 6
+    case touchX = 7
     case leftArrow = 123
     case rightArrow = 124
     case upArrow = 126

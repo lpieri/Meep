@@ -1,14 +1,22 @@
 import SpriteKit
 
-public class StartGame: SKScene {
+public class KeysScene: SKScene {
     
-    private let startMessage: String
+    private let message: String
+    private let currentLevel: String
     private let label: SKLabelNode
     
-    public override init() {
-        startMessage = "Press space to start..."
-        self.label = SKLabelNode(text: self.startMessage)
-        let logo = SKSpriteNode(imageNamed: "textureLogo")
+    public init(level: String) {
+        message = "Press space to continue..."
+        self.currentLevel = level
+        self.label = SKLabelNode(text: self.message)
+        var keyImg: String
+        if level == "Reverse" {
+            keyImg = "textureKeysReverse"
+        } else {
+            keyImg = "textureKeysNormal"
+        }
+        let logo = SKSpriteNode(imageNamed: keyImg)
         super.init(size: CGSize(width: 1024, height: 768))
         logo.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2)
         self.label.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 300)
@@ -27,9 +35,14 @@ public class StartGame: SKScene {
     }
     
     public func changeScene(level: String) {
-        let newScene = HistoryScene(level: "Reverse")
-        self.scene?.view?.presentScene(newScene, transition: .fade(withDuration: 1))
-    }
+           var newScene: SKScene
+           if currentLevel == "Reverse" {
+               newScene = ReverseWorld(fileNamed: "levelReverse")!
+           } else {
+               newScene = NormalWorld(fileNamed: "levelNormal")!
+           }
+           self.scene?.view?.presentScene(newScene, transition: .fade(withDuration: 1))
+       }
     
     public override func keyDown(with event: NSEvent) {
         let key = event.keyCode

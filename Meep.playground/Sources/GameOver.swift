@@ -9,11 +9,7 @@ public class GameOver: SKScene {
     private let level: String
     
     public init(level: String) {
-        #if os(macOS)
         self.respawnMessage = "Press space to respawn..."
-        #elseif os(iOS)
-        self.respawnMessage = "Touch the screen to respawn..."
-        #endif
         self.label = SKLabelNode(text: self.respawnMessage)
         let logo = SKSpriteNode(imageNamed: "textureGameOver")
         let floor = SKSpriteNode(imageNamed: "textureFloor")
@@ -58,7 +54,6 @@ public class GameOver: SKScene {
         self.scene?.view?.presentScene(newScene, transition: .fade(withDuration: 1))
     }
     
-    #if os(macOS)
     public override func keyDown(with event: NSEvent) {
         let key = event.keyCode
         switch key {
@@ -68,10 +63,5 @@ public class GameOver: SKScene {
             return
         }
     }
-    #elseif os(iOS)
-    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.changeScene()
-    }
-    #endif
     
 }

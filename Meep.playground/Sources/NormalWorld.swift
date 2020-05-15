@@ -5,12 +5,14 @@ public class NormalWorld: SKScene, SKPhysicsContactDelegate {
     public var door: SKSpriteNode!
     public var cameraNode: SKCameraNode!
     public var player: Player!
+    public var cameraMove: Bool!
     
     public override func didMove(to view: SKView) {
         
         self.size = CGSize(width: 4096, height: 768)
         self.scaleMode = .aspectFill
         self.physicsWorld.contactDelegate = self
+        self.cameraMove = true
         
         enumerateChildNodes(withName: "//RotatePlatform") {
             node, stop in
@@ -59,13 +61,32 @@ public class NormalWorld: SKScene, SKPhysicsContactDelegate {
                 wall.physicsBody?.affectedByGravity = false
                 wall.physicsBody?.allowsRotation = false
                 wall.physicsBody?.usesPreciseCollisionDetection = true
+                wall.physicsBody?.friction = 0
+                wall.physicsBody?.restitution = 0
                 wall.physicsBody?.categoryBitMask = categoryMask.wall.rawValue
                 wall.physicsBody?.collisionBitMask = categoryMask.player.rawValue
-                wall.physicsBody?.contactTestBitMask = 0x00000000
+                wall.physicsBody?.contactTestBitMask = categoryMask.player.rawValue
                 wall.physicsBody?.density = 100
             }
         }
+
         
+        enumerateChildNodes(withName: "//Floor") {
+            node, stop in
+            if let floor = node as? SKSpriteNode {
+                floor.physicsBody = .init(rectangleOf: floor.size)
+                floor.physicsBody?.isDynamic = false
+                floor.physicsBody?.affectedByGravity = false
+                floor.physicsBody?.allowsRotation = false
+                floor.physicsBody?.usesPreciseCollisionDetection = true
+                floor.physicsBody?.friction = 0
+                floor.physicsBody?.restitution = 0
+                floor.physicsBody?.categoryBitMask = categoryMask.floor.rawValue
+                floor.physicsBody?.collisionBitMask = categoryMask.player.rawValue
+                floor.physicsBody?.contactTestBitMask = 0x00000000
+                floor.physicsBody?.density = 100
+            }
+        }
         
         door = childNode(withName: "//Door") as? SKSpriteNode
         
@@ -77,7 +98,7 @@ public class NormalWorld: SKScene, SKPhysicsContactDelegate {
         player.physicsBody?.usesPreciseCollisionDetection = true
         player.physicsBody?.categoryBitMask = categoryMask.player.rawValue
         player.physicsBody?.collisionBitMask = 0x0000001E
-        player.physicsBody?.contactTestBitMask = categoryMask.spade.rawValue | categoryMask.goal.rawValue
+        player.physicsBody?.contactTestBitMask = categoryMask.spade.rawValue | categoryMask.goal.rawValue | categoryMask.wall.rawValue
         addChild(player)
         
         cameraNode = SKCameraNode()
@@ -89,6 +110,7 @@ public class NormalWorld: SKScene, SKPhysicsContactDelegate {
     }
     
     public func didBegin(_ contact: SKPhysicsContact) {
+
         if let name = contact.bodyA.node?.name {
             if name == "Spade" {
                 if player.numberOfLife - 1 == 0 {
@@ -118,7 +140,23 @@ public class NormalWorld: SKScene, SKPhysicsContactDelegate {
             } else if name == "NewSkin" {
                 let newScene = Credits()
                 self.scene?.view?.presentScene(newScene, transition: .fade(withDuration: 1))
+            } else if name == "Wall" && contact.bodyB.node?.name == "Meep" {
+                if contact.bodyA.node!.position.x < contact.bodyB.node!.position.x {
+                    player.moveBackOn = false
+                } else if contact.bodyA.node!.position.x > contact.bodyB.node!.position.x {
+                    player.runOn = false
+                }
+                self.cameraMove = false
+                player.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
             }
+        }
+    }
+    
+    public func didEnd(_ contact: SKPhysicsContact) {
+        if contact.bodyA.node?.name == "Wall" && contact.bodyB.node?.name == "Meep" {
+            self.cameraMove = true
+            player.moveBackOn = true
+            player.runOn = true
         }
     }
     
@@ -165,7 +203,6 @@ public class NormalWorld: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    #if os(macOS)
     public override func keyDown(with event: NSEvent) {
         let key = event.keyCode
         switch key {
@@ -177,6 +214,10 @@ public class NormalWorld: SKScene, SKPhysicsContactDelegate {
             player.squattingPlayer()
         case macOSKeyMap.upArrow.rawValue:
             player.jumpPlayer()
+        case macOSKeyMap.touchZ.rawValue:
+            player.diagonalJump(direction: "Left")
+        case macOSKeyMap.touchX.rawValue:
+            player.diagonalJump(direction: "Right")
         default:
             return
         }
@@ -189,23 +230,24 @@ public class NormalWorld: SKScene, SKPhysicsContactDelegate {
             player.falloffPlayer()
         case macOSKeyMap.downArrow.rawValue:
             player.noSquattingPlayer()
+        case macOSKeyMap.touchZ.rawValue:
+            player.falloffPlayer()
+        case macOSKeyMap.touchX.rawValue:
+            player.falloffPlayer()
         default:
             return
         }
     }
-    #endif
     
     public override func update(_ currentTime: TimeInterval) {
-        if player.position.x < cameraNode.position.x {
-            if player.position.x > -1536 {
-                cameraNode.position = .init(x: player.position.x, y: 0)
-                moveHeart()
-            }
-        } else if player.position.x > cameraNode.position.x {
-            if player.position.x < 1536 {
-                cameraNode.position = .init(x: player.position.x, y: 0)
-                moveHeart()
-            }
+        player.physicsBody?.velocity.dx = 0
+        if  player.position.x > -1536 && player.position.x < cameraNode.position.x && cameraMove == true {
+            cameraNode.position = .init(x: player.position.x, y: 0)
+            moveHeart()
+        }
+        else if player.position.x < 1536 && player.position.x > cameraNode.position.x && cameraMove == true {
+            cameraNode.position = .init(x: player.position.x, y: 0)
+            moveHeart()
         }
     }
 }

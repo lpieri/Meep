@@ -27,11 +27,7 @@ public class HistoryScene: SKScene {
     private let label: SKLabelNode
     
     public init(level: String) {
-        #if os(macOS)
         continueMessage = "Press space to continue..."
-        #elseif os(iOS)
-        continueMessage = "Touch the screen to continue..."
-        #endif
         let size = CGSize(width: 1024, height: 768)
         self.currentLevel = level
         self.label = SKLabelNode(text: self.continueMessage)
@@ -63,14 +59,13 @@ public class HistoryScene: SKScene {
     public func changeScene(level: String) {
         var newScene: SKScene
         if currentLevel == "Reverse" {
-            newScene = ReverseWorld(fileNamed: "levelReverse")!
+            newScene = KeysScene(level: "Reverse")
         } else {
-            newScene = NormalWorld(fileNamed: "levelNormal")!
+            newScene = KeysScene(level: "Normal")
         }
         self.scene?.view?.presentScene(newScene, transition: .fade(withDuration: 1))
     }
     
-    #if os(macOS)
     public override func keyDown(with event: NSEvent) {
         let key = event.keyCode
         switch key {
@@ -80,10 +75,5 @@ public class HistoryScene: SKScene {
             return
         }
     }
-    #elseif os(iOS)
-    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.changeScene(level: "Reverse")
-    }
-    #endif
 
 }

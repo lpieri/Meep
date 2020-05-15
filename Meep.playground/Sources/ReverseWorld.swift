@@ -6,11 +6,12 @@ public class ReverseWorld: SKScene, SKPhysicsContactDelegate {
     public var key: SKSpriteNode!
     public var rotatePlatform: SKSpriteNode!
     public var cameraNode: SKCameraNode!
+    public var cameraMove: Bool!
     public var player: Player!
-    private var previousPlayerPositionX: CGFloat!
     
     public override func didMove(to view: SKView) {
         
+        self.cameraMove = true
         self.size = CGSize(width: 4096, height: 768)
         self.scaleMode = .aspectFill
         self.physicsWorld.contactDelegate = self
@@ -41,10 +42,29 @@ public class ReverseWorld: SKScene, SKPhysicsContactDelegate {
                 wall.physicsBody?.affectedByGravity = false
                 wall.physicsBody?.allowsRotation = false
                 wall.physicsBody?.usesPreciseCollisionDetection = true
+                wall.physicsBody?.friction = 0
+                wall.physicsBody?.restitution = 0
                 wall.physicsBody?.categoryBitMask = categoryMask.wall.rawValue
                 wall.physicsBody?.collisionBitMask = categoryMask.player.rawValue
-                wall.physicsBody?.contactTestBitMask = 0x00000000
+                wall.physicsBody?.contactTestBitMask = categoryMask.player.rawValue
                 wall.physicsBody?.density = 100
+            }
+        }
+        
+        enumerateChildNodes(withName: "//Floor") {
+            node, stop in
+            if let floor = node as? SKSpriteNode {
+                floor.physicsBody = .init(rectangleOf: floor.size)
+                floor.physicsBody?.isDynamic = false
+                floor.physicsBody?.affectedByGravity = false
+                floor.physicsBody?.allowsRotation = false
+                floor.physicsBody?.usesPreciseCollisionDetection = true
+                floor.physicsBody?.friction = 0
+                floor.physicsBody?.restitution = 0
+                floor.physicsBody?.categoryBitMask = categoryMask.floor.rawValue
+                floor.physicsBody?.collisionBitMask = categoryMask.player.rawValue
+                floor.physicsBody?.contactTestBitMask = 0x00000000
+                floor.physicsBody?.density = 100
             }
         }
         
@@ -59,7 +79,6 @@ public class ReverseWorld: SKScene, SKPhysicsContactDelegate {
                 mountain.physicsBody?.categoryBitMask = categoryMask.wall.rawValue
                 mountain.physicsBody?.collisionBitMask = categoryMask.player.rawValue
                 mountain.physicsBody?.contactTestBitMask = 0x00000000
-                mountain.physicsBody?.density = 100
             }
         }
         
@@ -73,10 +92,8 @@ public class ReverseWorld: SKScene, SKPhysicsContactDelegate {
         player.physicsBody?.usesPreciseCollisionDetection = true
         player.physicsBody?.categoryBitMask = categoryMask.player.rawValue
         player.physicsBody?.collisionBitMask = 0x0000001E
-        player.physicsBody?.contactTestBitMask = categoryMask.spade.rawValue | categoryMask.goal.rawValue
+        player.physicsBody?.contactTestBitMask = categoryMask.spade.rawValue | categoryMask.goal.rawValue | categoryMask.wall.rawValue
         addChild(player)
-        
-        previousPlayerPositionX = player.position.x
 
         rotatePlatform = childNode(withName: "//RotatePlatform") as? SKSpriteNode
         rotatePlatform.run(.repeatForever(rotatePlatformActionSequence))
@@ -93,17 +110,17 @@ public class ReverseWorld: SKScene, SKPhysicsContactDelegate {
     
     public func didBegin(_ contact: SKPhysicsContact) {
         if let name = contact.bodyA.node?.name {
-            if name == "Key" {
+            if name == "Key" && player.getKey == false {
                 player.getKey = true
                 key.isHidden = true
                 player.duringAnimation = true
-                let moveCamera = SKAction.moveTo(x: -1536, duration: 1)
+                let moveCamera = SKAction.moveTo(x: -1536, duration: 2)
                 cameraNode.run(moveCamera)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     let fadeInTimeRift = SKAction.fadeIn(withDuration: 1)
                     self.timeRift.run(fadeInTimeRift)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        let returnCamera = SKAction.moveTo(x: self.player.position.x, duration: 1)
+                        let returnCamera = SKAction.moveTo(x: self.player.position.x, duration: 2)
                         self.cameraNode.run(returnCamera)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                             self.player.duringAnimation = false
@@ -122,10 +139,27 @@ public class ReverseWorld: SKScene, SKPhysicsContactDelegate {
                     player.numberOfLife -= 1
                     heart.isHidden = true
                 }
+            } else if name == "Wall" && contact.bodyB.node?.name == "Meep" {
+                if contact.bodyA.node!.position.x > contact.bodyB.node!.position.x {
+                    player.moveBackOn = false
+                } else if contact.bodyA.node!.position.x < contact.bodyB.node!.position.x {
+                    player.runOn = false
+                }
+                self.cameraMove = false
+                player.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
             }
         }
     }
         
+    
+    public func didEnd(_ contact: SKPhysicsContact) {
+        if contact.bodyA.node?.name == "Wall" && contact.bodyB.node?.name == "Meep" {
+            self.cameraMove = true
+            player.moveBackOn = true
+            player.runOn = true
+        }
+    }
+    
     func rotatePlatformAction() -> SKAction {
         let rotateValue: CGFloat = .pi / 2
         return SKAction.run {
@@ -163,7 +197,6 @@ public class ReverseWorld: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    #if os(macOS)
     public override func keyDown(with event: NSEvent) {
         let key = event.keyCode
         switch key {
@@ -175,6 +208,10 @@ public class ReverseWorld: SKScene, SKPhysicsContactDelegate {
             player.jumpPlayer()
         case macOSKeyMap.upArrow.rawValue:
             player.squattingPlayer()
+        case macOSKeyMap.touchZ.rawValue:
+            player.diagonalJump(direction: "Left")
+        case macOSKeyMap.touchX.rawValue:
+            player.diagonalJump(direction: "Right")
         default:
             return
         }
@@ -187,25 +224,24 @@ public class ReverseWorld: SKScene, SKPhysicsContactDelegate {
             player.noSquattingPlayer()
         case macOSKeyMap.downArrow.rawValue:
             player.falloffPlayer()
+        case macOSKeyMap.touchZ.rawValue:
+            player.falloffPlayer()
+        case macOSKeyMap.touchX.rawValue:
+            player.falloffPlayer()
         default:
             return
         }
     }
-    #endif
     
     public override func update(_ currentTime: TimeInterval) {
-        if player.position.x - previousPlayerPositionX < -27 {
-            if  player.position.x > -1536 && player.position.x < cameraNode.position.x {
-                previousPlayerPositionX = player.position.x
-                cameraNode.position = .init(x: player.position.x, y: 0)
-                moveHeart()
-            }
-        } else if player.position.x - previousPlayerPositionX > 27 {
-            if player.position.x < 1536 && player.position.x > cameraNode.position.x {
-                previousPlayerPositionX = player.position.x
-                cameraNode.position = .init(x: player.position.x, y: 0)
-                moveHeart()
-            }
+        player.physicsBody?.velocity.dx = 0
+        if  player.position.x > -1536 && player.position.x < cameraNode.position.x && cameraMove == true {
+            cameraNode.position = .init(x: player.position.x, y: 0)
+            moveHeart()
+        }
+        else if player.position.x < 1536 && player.position.x > cameraNode.position.x && cameraMove == true {
+            cameraNode.position = .init(x: player.position.x, y: 0)
+            moveHeart()
         }
     }
     
