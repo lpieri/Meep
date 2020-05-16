@@ -28,7 +28,7 @@ public class ReverseWorld: SKScene, SKPhysicsContactDelegate {
                 platform.physicsBody?.usesPreciseCollisionDetection = true
                 platform.physicsBody?.categoryBitMask = categoryMask.flyingPlatform.rawValue
                 platform.physicsBody?.collisionBitMask = categoryMask.player.rawValue
-                platform.physicsBody?.contactTestBitMask = 0x00000000
+                platform.physicsBody?.contactTestBitMask = categoryMask.player.rawValue
                 platform.physicsBody?.density = 100
                 self.flying(platform: platform)
             }
@@ -63,7 +63,7 @@ public class ReverseWorld: SKScene, SKPhysicsContactDelegate {
                 floor.physicsBody?.restitution = 0
                 floor.physicsBody?.categoryBitMask = categoryMask.floor.rawValue
                 floor.physicsBody?.collisionBitMask = categoryMask.player.rawValue
-                floor.physicsBody?.contactTestBitMask = 0x00000000
+                floor.physicsBody?.contactTestBitMask =  categoryMask.player.rawValue
                 floor.physicsBody?.density = 100
             }
         }
@@ -78,7 +78,7 @@ public class ReverseWorld: SKScene, SKPhysicsContactDelegate {
                 mountain.physicsBody?.usesPreciseCollisionDetection = true
                 mountain.physicsBody?.categoryBitMask = categoryMask.wall.rawValue
                 mountain.physicsBody?.collisionBitMask = categoryMask.player.rawValue
-                mountain.physicsBody?.contactTestBitMask = 0x00000000
+                mountain.physicsBody?.contactTestBitMask = categoryMask.player.rawValue
             }
         }
         
@@ -147,6 +147,11 @@ public class ReverseWorld: SKScene, SKPhysicsContactDelegate {
                 }
                 self.cameraMove = false
                 player.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+            } else if name == "Floor" || name == "Mountain" || name == "FlyingPlatform" {
+                self.cameraMove = true
+                player.moveBackOn = true
+                player.runOn = true
+                player.numberOfJump = 0
             }
         }
     }
@@ -222,12 +227,6 @@ public class ReverseWorld: SKScene, SKPhysicsContactDelegate {
         switch key {
         case macOSKeyMap.upArrow.rawValue:
             player.noSquattingPlayer()
-        case macOSKeyMap.downArrow.rawValue:
-            player.falloffPlayer()
-        case macOSKeyMap.touchZ.rawValue:
-            player.falloffPlayer()
-        case macOSKeyMap.touchX.rawValue:
-            player.falloffPlayer()
         default:
             return
         }

@@ -6,7 +6,7 @@ public class Player: SKSpriteNode {
     public let runValue: CGFloat
     private let moveBackValue: CGFloat
     private let jumpValue: CGFloat
-    private var numberOfJump: Int
+    public var numberOfJump: Int
     public var getKey: Bool
     public var duringAnimation: Bool
     public var runOn: Bool
@@ -17,7 +17,7 @@ public class Player: SKSpriteNode {
     public init(level: String, frame: CGRect) {
         self.parentFrame = frame
         self.levelTexture = level
-        self.runValue = level == "Reverse" ? -30 : 30
+        self.runValue = level == "Reverse" ? -25 : 25
         self.moveBackValue = self.runValue * -1
         self.jumpValue = level == "Reverse" ? -90 : 90
         self.numberOfJump = 0
@@ -26,19 +26,16 @@ public class Player: SKSpriteNode {
         self.duringAnimation = false
         self.runOn = true
         self.moveBackOn = true
-        let xPosition = 1980
-        var texture: SKTexture
         var position: CGPoint
         var rotate: CGFloat
         if level == "Reverse" {
-            position = CGPoint(x: xPosition, y: 291)
+            position = CGPoint(x: 1980, y: 291)
             rotate = .pi / 1
         } else {
             rotate = 0
-            position = CGPoint(x: xPosition * -1, y: -291)
+            position = CGPoint(x: -1980, y: -291)
         }
-        texture = SKTexture(imageNamed: "textureReversePlayer")
-        super.init(texture: texture, color: .clear, size: CGSize(width: 20, height: 29))
+        super.init(texture: SKTexture(imageNamed: "textureReversePlayer"), color: .clear, size: CGSize(width: 20, height: 29))
         self.xScale = 2
         self.yScale = 2
         self.position = position
@@ -107,10 +104,6 @@ public class Player: SKSpriteNode {
             self.position.y += jumpValue
             self.numberOfJump += 1
         }
-    }
-    
-    public func falloffPlayer() {
-        self.numberOfJump -= 1
     }
 
     public func squattingPlayer() {

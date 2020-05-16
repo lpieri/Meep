@@ -31,7 +31,7 @@ public class NormalWorld: SKScene, SKPhysicsContactDelegate {
                 platform.physicsBody?.usesPreciseCollisionDetection = true
                 platform.physicsBody?.categoryBitMask = categoryMask.flyingPlatform.rawValue
                 platform.physicsBody?.collisionBitMask = categoryMask.player.rawValue
-                platform.physicsBody?.contactTestBitMask = 0x00000000
+                platform.physicsBody?.contactTestBitMask = categoryMask.player.rawValue
                 platform.physicsBody?.density = 100
                 self.flying(platform: platform, direction: "Down")
             }
@@ -47,7 +47,7 @@ public class NormalWorld: SKScene, SKPhysicsContactDelegate {
                 platform.physicsBody?.usesPreciseCollisionDetection = true
                 platform.physicsBody?.categoryBitMask = categoryMask.flyingPlatform.rawValue
                 platform.physicsBody?.collisionBitMask = categoryMask.player.rawValue
-                platform.physicsBody?.contactTestBitMask = 0x00000000
+                platform.physicsBody?.contactTestBitMask = categoryMask.player.rawValue
                 platform.physicsBody?.density = 100
                 self.flying(platform: platform, direction: "Up")
             }
@@ -83,12 +83,21 @@ public class NormalWorld: SKScene, SKPhysicsContactDelegate {
                 floor.physicsBody?.restitution = 0
                 floor.physicsBody?.categoryBitMask = categoryMask.floor.rawValue
                 floor.physicsBody?.collisionBitMask = categoryMask.player.rawValue
-                floor.physicsBody?.contactTestBitMask = 0x00000000
+                floor.physicsBody?.contactTestBitMask = categoryMask.player.rawValue
                 floor.physicsBody?.density = 100
             }
         }
         
         door = childNode(withName: "//Door") as? SKSpriteNode
+        door.physicsBody = .init(rectangleOf: door.size)
+        door.physicsBody?.isDynamic = false
+        door.physicsBody?.affectedByGravity = false
+        door.physicsBody?.allowsRotation = false
+        door.physicsBody?.usesPreciseCollisionDetection = true
+        door.physicsBody?.categoryBitMask = categoryMask.wall.rawValue
+        door.physicsBody?.collisionBitMask = categoryMask.player.rawValue
+        door.physicsBody?.contactTestBitMask = categoryMask.player.rawValue
+        door.physicsBody?.density = 100
         
         player = Player(level: "Normal", frame: frame)
         player.physicsBody = SKPhysicsBody(texture: player.texture!, size: player.size)
@@ -110,7 +119,6 @@ public class NormalWorld: SKScene, SKPhysicsContactDelegate {
     }
     
     public func didBegin(_ contact: SKPhysicsContact) {
-
         if let name = contact.bodyA.node?.name {
             if name == "Spade" {
                 if player.numberOfLife - 1 == 0 {
@@ -140,7 +148,7 @@ public class NormalWorld: SKScene, SKPhysicsContactDelegate {
             } else if name == "NewSkin" {
                 let newScene = Credits()
                 self.scene?.view?.presentScene(newScene, transition: .fade(withDuration: 1))
-            } else if name == "Wall" && contact.bodyB.node?.name == "Meep" {
+            } else if (name == "Wall" || name == "Door") && contact.bodyB.node?.name == "Meep" {
                 if contact.bodyA.node!.position.x < contact.bodyB.node!.position.x {
                     player.moveBackOn = false
                 } else if contact.bodyA.node!.position.x > contact.bodyB.node!.position.x {
@@ -148,12 +156,17 @@ public class NormalWorld: SKScene, SKPhysicsContactDelegate {
                 }
                 self.cameraMove = false
                 player.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+            } else if name == "Floor" || name.contains("FlyingPlatform") {
+                self.cameraMove = true
+                player.moveBackOn = true
+                player.runOn = true
+                player.numberOfJump = 0
             }
         }
     }
     
     public func didEnd(_ contact: SKPhysicsContact) {
-        if contact.bodyA.node?.name == "Wall" && contact.bodyB.node?.name == "Meep" {
+        if (contact.bodyA.node?.name == "Wall" || contact.bodyA.node?.name == "Door") && contact.bodyB.node?.name == "Meep" {
             self.cameraMove = true
             player.moveBackOn = true
             player.runOn = true
@@ -226,14 +239,8 @@ public class NormalWorld: SKScene, SKPhysicsContactDelegate {
     public override func keyUp(with event: NSEvent) {
         let key = event.keyCode
         switch key {
-        case macOSKeyMap.upArrow.rawValue:
-            player.falloffPlayer()
         case macOSKeyMap.downArrow.rawValue:
             player.noSquattingPlayer()
-        case macOSKeyMap.touchZ.rawValue:
-            player.falloffPlayer()
-        case macOSKeyMap.touchX.rawValue:
-            player.falloffPlayer()
         default:
             return
         }
