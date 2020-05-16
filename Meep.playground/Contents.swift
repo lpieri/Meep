@@ -1,4 +1,9 @@
-//: A SpriteKit based Playground
+/*:
+ Meep is a game !
+ Meep is a little blue monster, he lives in a universe where all monsters are blue, but Meep is not a monster like the others...
+ 
+ Coded by Louise Pieri.
+*/
 
 import PlaygroundSupport
 import AVKit
