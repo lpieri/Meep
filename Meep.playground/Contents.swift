@@ -9,7 +9,7 @@ import PlaygroundSupport
 import AVKit
 import SpriteKit
 
-let Width = 1024
+let Width = 1024 
 let Height = 768
 
 let url = Bundle.main.url(forResource: "vlad-gluschenko-sea-breeze", withExtension: "mp3")!
@@ -23,3 +23,5 @@ scene.scaleMode = .aspectFill
 sceneView.presentScene(scene)
 
 PlaygroundSupport.PlaygroundPage.current.liveView = sceneView
+  
+ 

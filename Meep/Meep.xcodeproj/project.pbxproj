@@ -7,30 +7,54 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B7DE9ED724657BC600900235 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DE9ED624657BC600900235 /* AppDelegate.swift */; };
-		B7DE9ED924657BC600900235 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B7DE9ED824657BC600900235 /* GameScene.sks */; };
-		B7DE9EDB24657BC600900235 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = B7DE9EDA24657BC600900235 /* Actions.sks */; };
-		B7DE9EDD24657BC600900235 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DE9EDC24657BC600900235 /* GameScene.swift */; };
-		B7DE9EDF24657BC600900235 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DE9EDE24657BC600900235 /* ViewController.swift */; };
-		B7DE9EE124657BC700900235 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7DE9EE024657BC700900235 /* Assets.xcassets */; };
-		B7DE9EE424657BC700900235 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7DE9EE224657BC700900235 /* Main.storyboard */; };
+		B77C564525DAA8B00019C48D /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77C564425DAA8B00019C48D /* GameView.swift */; };
+		B77C564825DAA9370019C48D /* SpriteKitInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77C564725DAA9370019C48D /* SpriteKitInterface.swift */; };
+		B77C565325DAAE390019C48D /* HistoryScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77C565225DAAE390019C48D /* HistoryScene.swift */; };
+		B77C565625DAAFD10019C48D /* KeyScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77C565525DAAFD10019C48D /* KeyScene.swift */; };
+		B77C565925DAAFED0019C48D /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77C565825DAAFED0019C48D /* Tools.swift */; };
+		B7CCFC6225DABA1900DE0B48 /* NormalWorld.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CCFC6125DABA1900DE0B48 /* NormalWorld.swift */; };
+		B7CCFC6525DABA2C00DE0B48 /* ReverseWorld.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CCFC6425DABA2C00DE0B48 /* ReverseWorld.swift */; };
+		B7CCFC6825DABA3A00DE0B48 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CCFC6725DABA3A00DE0B48 /* Player.swift */; };
+		B7CCFC6B25DABA4800DE0B48 /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CCFC6A25DABA4800DE0B48 /* GameOver.swift */; };
+		B7CCFC6F25DABA5D00DE0B48 /* Credit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CCFC6E25DABA5D00DE0B48 /* Credit.swift */; };
+		B7CCFC7525DABBBF00DE0B48 /* levelNormal.sks in Resources */ = {isa = PBXBuildFile; fileRef = B7CCFC7425DABBBF00DE0B48 /* levelNormal.sks */; };
+		B7CCFC7F25DABDA700DE0B48 /* levelReverse.sks in Resources */ = {isa = PBXBuildFile; fileRef = B7CCFC7E25DABDA700DE0B48 /* levelReverse.sks */; };
+		B7E3F21224F92993001DFD32 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E3F21124F92993001DFD32 /* AppDelegate.swift */; };
+		B7E3F21424F92993001DFD32 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E3F21324F92993001DFD32 /* MenuView.swift */; };
+		B7E3F21624F92994001DFD32 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7E3F21524F92994001DFD32 /* Assets.xcassets */; };
+		B7E3F21924F92994001DFD32 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7E3F21824F92994001DFD32 /* Preview Assets.xcassets */; };
+		B7E3F21C24F92994001DFD32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7E3F21A24F92994001DFD32 /* Main.storyboard */; };
+		B7E3F22524F93A23001DFD32 /* OptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E3F22424F93A23001DFD32 /* OptionView.swift */; };
+		B7E3F22724F94DA6001DFD32 /* KeysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E3F22624F94DA6001DFD32 /* KeysView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B7DE9ED324657BC600900235 /* Meep.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meep.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B7DE9ED624657BC600900235 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B7DE9ED824657BC600900235 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		B7DE9EDA24657BC600900235 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
-		B7DE9EDC24657BC600900235 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
-		B7DE9EDE24657BC600900235 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		B7DE9EE024657BC700900235 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B7DE9EE324657BC700900235 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		B7DE9EE524657BC700900235 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B7DE9EE624657BC700900235 /* Meep.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Meep.entitlements; sourceTree = "<group>"; };
+		B77C564425DAA8B00019C48D /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		B77C564725DAA9370019C48D /* SpriteKitInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteKitInterface.swift; sourceTree = "<group>"; };
+		B77C565225DAAE390019C48D /* HistoryScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryScene.swift; sourceTree = "<group>"; };
+		B77C565525DAAFD10019C48D /* KeyScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyScene.swift; sourceTree = "<group>"; };
+		B77C565825DAAFED0019C48D /* Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
+		B7CCFC6125DABA1900DE0B48 /* NormalWorld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalWorld.swift; sourceTree = "<group>"; };
+		B7CCFC6425DABA2C00DE0B48 /* ReverseWorld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseWorld.swift; sourceTree = "<group>"; };
+		B7CCFC6725DABA3A00DE0B48 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		B7CCFC6A25DABA4800DE0B48 /* GameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
+		B7CCFC6E25DABA5D00DE0B48 /* Credit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credit.swift; sourceTree = "<group>"; };
+		B7CCFC7425DABBBF00DE0B48 /* levelNormal.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = levelNormal.sks; sourceTree = "<group>"; };
+		B7CCFC7E25DABDA700DE0B48 /* levelReverse.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = levelReverse.sks; sourceTree = "<group>"; };
+		B7E3F20E24F92993001DFD32 /* Meep.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meep.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7E3F21124F92993001DFD32 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B7E3F21324F92993001DFD32 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		B7E3F21524F92994001DFD32 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B7E3F21824F92994001DFD32 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B7E3F21B24F92994001DFD32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B7E3F21D24F92994001DFD32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B7E3F21E24F92994001DFD32 /* Meep.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Meep.entitlements; sourceTree = "<group>"; };
+		B7E3F22424F93A23001DFD32 /* OptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionView.swift; sourceTree = "<group>"; };
+		B7E3F22624F94DA6001DFD32 /* KeysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeysView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		B7DE9ED024657BC600900235 /* Frameworks */ = {
+		B7E3F20B24F92993001DFD32 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -40,48 +64,92 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B7DE9ECA24657BC600900235 = {
+		B77C563D25DAA1A60019C48D /* Menu */ = {
 			isa = PBXGroup;
 			children = (
-				B7DE9ED524657BC600900235 /* Meep */,
-				B7DE9ED424657BC600900235 /* Products */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		B77C564D25DAADEA0019C48D /* SpriteKitScenes */ = {
+			isa = PBXGroup;
+			children = (
+				B77C565225DAAE390019C48D /* HistoryScene.swift */,
+				B77C565525DAAFD10019C48D /* KeyScene.swift */,
+				B77C565825DAAFED0019C48D /* Tools.swift */,
+				B7CCFC6125DABA1900DE0B48 /* NormalWorld.swift */,
+				B7CCFC6425DABA2C00DE0B48 /* ReverseWorld.swift */,
+				B7CCFC6725DABA3A00DE0B48 /* Player.swift */,
+				B7CCFC6A25DABA4800DE0B48 /* GameOver.swift */,
+				B7CCFC6E25DABA5D00DE0B48 /* Credit.swift */,
+			);
+			path = SpriteKitScenes;
+			sourceTree = "<group>";
+		};
+		B7CCFC7825DABC0700DE0B48 /* SpriteKitLevel */ = {
+			isa = PBXGroup;
+			children = (
+				B7CCFC7425DABBBF00DE0B48 /* levelNormal.sks */,
+				B7CCFC7E25DABDA700DE0B48 /* levelReverse.sks */,
+			);
+			path = SpriteKitLevel;
+			sourceTree = "<group>";
+		};
+		B7E3F20524F92993001DFD32 = {
+			isa = PBXGroup;
+			children = (
+				B7E3F21024F92993001DFD32 /* Meep */,
+				B7E3F20F24F92993001DFD32 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		B7DE9ED424657BC600900235 /* Products */ = {
+		B7E3F20F24F92993001DFD32 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B7DE9ED324657BC600900235 /* Meep.app */,
+				B7E3F20E24F92993001DFD32 /* Meep.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B7DE9ED524657BC600900235 /* Meep */ = {
+		B7E3F21024F92993001DFD32 /* Meep */ = {
 			isa = PBXGroup;
 			children = (
-				B7DE9ED624657BC600900235 /* AppDelegate.swift */,
-				B7DE9ED824657BC600900235 /* GameScene.sks */,
-				B7DE9EDA24657BC600900235 /* Actions.sks */,
-				B7DE9EDC24657BC600900235 /* GameScene.swift */,
-				B7DE9EDE24657BC600900235 /* ViewController.swift */,
-				B7DE9EE024657BC700900235 /* Assets.xcassets */,
-				B7DE9EE224657BC700900235 /* Main.storyboard */,
-				B7DE9EE524657BC700900235 /* Info.plist */,
-				B7DE9EE624657BC700900235 /* Meep.entitlements */,
+				B7CCFC7825DABC0700DE0B48 /* SpriteKitLevel */,
+				B77C564D25DAADEA0019C48D /* SpriteKitScenes */,
+				B77C563D25DAA1A60019C48D /* Menu */,
+				B7E3F21124F92993001DFD32 /* AppDelegate.swift */,
+				B7E3F21324F92993001DFD32 /* MenuView.swift */,
+				B7E3F22424F93A23001DFD32 /* OptionView.swift */,
+				B7E3F22624F94DA6001DFD32 /* KeysView.swift */,
+				B7E3F21524F92994001DFD32 /* Assets.xcassets */,
+				B7E3F21A24F92994001DFD32 /* Main.storyboard */,
+				B7E3F21D24F92994001DFD32 /* Info.plist */,
+				B7E3F21E24F92994001DFD32 /* Meep.entitlements */,
+				B7E3F21724F92994001DFD32 /* Preview Content */,
+				B77C564425DAA8B00019C48D /* GameView.swift */,
+				B77C564725DAA9370019C48D /* SpriteKitInterface.swift */,
 			);
 			path = Meep;
+			sourceTree = "<group>";
+		};
+		B7E3F21724F92994001DFD32 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				B7E3F21824F92994001DFD32 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B7DE9ED224657BC600900235 /* Meep */ = {
+		B7E3F20D24F92993001DFD32 /* Meep */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B7DE9EE924657BC700900235 /* Build configuration list for PBXNativeTarget "Meep" */;
+			buildConfigurationList = B7E3F22124F92994001DFD32 /* Build configuration list for PBXNativeTarget "Meep" */;
 			buildPhases = (
-				B7DE9ECF24657BC600900235 /* Sources */,
-				B7DE9ED024657BC600900235 /* Frameworks */,
-				B7DE9ED124657BC600900235 /* Resources */,
+				B7E3F20A24F92993001DFD32 /* Sources */,
+				B7E3F20B24F92993001DFD32 /* Frameworks */,
+				B7E3F20C24F92993001DFD32 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -89,25 +157,25 @@
 			);
 			name = Meep;
 			productName = Meep;
-			productReference = B7DE9ED324657BC600900235 /* Meep.app */;
+			productReference = B7E3F20E24F92993001DFD32 /* Meep.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		B7DE9ECB24657BC600900235 /* Project object */ = {
+		B7E3F20624F92993001DFD32 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1140;
-				LastUpgradeCheck = 1140;
+				LastSwiftUpdateCheck = 1160;
+				LastUpgradeCheck = 1230;
 				ORGANIZATIONNAME = "Louise Pieri";
 				TargetAttributes = {
-					B7DE9ED224657BC600900235 = {
-						CreatedOnToolsVersion = 11.4.1;
+					B7E3F20D24F92993001DFD32 = {
+						CreatedOnToolsVersion = 11.6;
 					};
 				};
 			};
-			buildConfigurationList = B7DE9ECE24657BC600900235 /* Build configuration list for PBXProject "Meep" */;
+			buildConfigurationList = B7E3F20924F92993001DFD32 /* Build configuration list for PBXProject "Meep" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -115,48 +183,60 @@
 				en,
 				Base,
 			);
-			mainGroup = B7DE9ECA24657BC600900235;
-			productRefGroup = B7DE9ED424657BC600900235 /* Products */;
+			mainGroup = B7E3F20524F92993001DFD32;
+			productRefGroup = B7E3F20F24F92993001DFD32 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B7DE9ED224657BC600900235 /* Meep */,
+				B7E3F20D24F92993001DFD32 /* Meep */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		B7DE9ED124657BC600900235 /* Resources */ = {
+		B7E3F20C24F92993001DFD32 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B7DE9ED924657BC600900235 /* GameScene.sks in Resources */,
-				B7DE9EE124657BC700900235 /* Assets.xcassets in Resources */,
-				B7DE9EDB24657BC600900235 /* Actions.sks in Resources */,
-				B7DE9EE424657BC700900235 /* Main.storyboard in Resources */,
+				B7E3F21C24F92994001DFD32 /* Main.storyboard in Resources */,
+				B7E3F21924F92994001DFD32 /* Preview Assets.xcassets in Resources */,
+				B7CCFC7F25DABDA700DE0B48 /* levelReverse.sks in Resources */,
+				B7CCFC7525DABBBF00DE0B48 /* levelNormal.sks in Resources */,
+				B7E3F21624F92994001DFD32 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		B7DE9ECF24657BC600900235 /* Sources */ = {
+		B7E3F20A24F92993001DFD32 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B7DE9EDF24657BC600900235 /* ViewController.swift in Sources */,
-				B7DE9EDD24657BC600900235 /* GameScene.swift in Sources */,
-				B7DE9ED724657BC600900235 /* AppDelegate.swift in Sources */,
+				B7E3F22724F94DA6001DFD32 /* KeysView.swift in Sources */,
+				B7E3F21424F92993001DFD32 /* MenuView.swift in Sources */,
+				B7E3F22524F93A23001DFD32 /* OptionView.swift in Sources */,
+				B7CCFC6225DABA1900DE0B48 /* NormalWorld.swift in Sources */,
+				B7CCFC6F25DABA5D00DE0B48 /* Credit.swift in Sources */,
+				B7CCFC6B25DABA4800DE0B48 /* GameOver.swift in Sources */,
+				B7CCFC6825DABA3A00DE0B48 /* Player.swift in Sources */,
+				B77C565625DAAFD10019C48D /* KeyScene.swift in Sources */,
+				B77C564825DAA9370019C48D /* SpriteKitInterface.swift in Sources */,
+				B77C565325DAAE390019C48D /* HistoryScene.swift in Sources */,
+				B7E3F21224F92993001DFD32 /* AppDelegate.swift in Sources */,
+				B77C564525DAA8B00019C48D /* GameView.swift in Sources */,
+				B77C565925DAAFED0019C48D /* Tools.swift in Sources */,
+				B7CCFC6525DABA2C00DE0B48 /* ReverseWorld.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		B7DE9EE224657BC700900235 /* Main.storyboard */ = {
+		B7E3F21A24F92994001DFD32 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B7DE9EE324657BC700900235 /* Base */,
+				B7E3F21B24F92994001DFD32 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -164,7 +244,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		B7DE9EE724657BC700900235 /* Debug */ = {
+		B7E3F21F24F92994001DFD32 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -190,6 +270,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -224,7 +305,7 @@
 			};
 			name = Debug;
 		};
-		B7DE9EE824657BC700900235 /* Release */ = {
+		B7E3F22024F92994001DFD32 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -250,6 +331,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -277,37 +359,49 @@
 			};
 			name = Release;
 		};
-		B7DE9EEA24657BC700900235 /* Debug */ = {
+		B7E3F22224F92994001DFD32 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Meep/Meep.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"Meep/Preview Content\"";
+				DEVELOPMENT_TEAM = EV49Z586CH;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Meep/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = louise.lgbt.Meep;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = louise.tech.Meep;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
-		B7DE9EEB24657BC700900235 /* Release */ = {
+		B7E3F22324F92994001DFD32 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Meep/Meep.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"Meep/Preview Content\"";
+				DEVELOPMENT_TEAM = EV49Z586CH;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Meep/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = louise.lgbt.Meep;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = louise.tech.Meep;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -316,25 +410,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B7DE9ECE24657BC600900235 /* Build configuration list for PBXProject "Meep" */ = {
+		B7E3F20924F92993001DFD32 /* Build configuration list for PBXProject "Meep" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B7DE9EE724657BC700900235 /* Debug */,
-				B7DE9EE824657BC700900235 /* Release */,
+				B7E3F21F24F92994001DFD32 /* Debug */,
+				B7E3F22024F92994001DFD32 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B7DE9EE924657BC700900235 /* Build configuration list for PBXNativeTarget "Meep" */ = {
+		B7E3F22124F92994001DFD32 /* Build configuration list for PBXNativeTarget "Meep" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B7DE9EEA24657BC700900235 /* Debug */,
-				B7DE9EEB24657BC700900235 /* Release */,
+				B7E3F22224F92994001DFD32 /* Debug */,
+				B7E3F22324F92994001DFD32 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = B7DE9ECB24657BC600900235 /* Project object */;
+	rootObject = B7E3F20624F92993001DFD32 /* Project object */;
 }

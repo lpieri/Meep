@@ -14,6 +14,14 @@ Meep is a little blue monster, he lives in a universe where all monsters are blu
 
 Meep is a transgender monster... She dreams of becoming a pink monster in the other universe.
 
+## Swift Student Challenge Result
+
+Meep is one of the 350 winners !!
+
+## Next Change
+
+Turning Meep into a macOS iOS application !
+
 ## Preview
 
 <h1 align="center">
@@ -23,3 +31,6 @@ Meep is a transgender monster... She dreams of becoming a pink monster in the ot
 <br>
 </h1>
 
+## Contributor
+
+[Louise Pieri](https://github.com/lpieri)
