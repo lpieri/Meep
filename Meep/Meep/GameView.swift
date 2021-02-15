@@ -16,6 +16,7 @@ struct GameView: View {
             Button(action: { NSApplication.shared.terminate(self) }, label: { Image(systemName: "xmark") })
                 .buttonStyle(PlainButtonStyle())
                 .imageScale(.large)
+                .foregroundColor(.red)
                 .position(x: 30, y: 30)
         }
     }
