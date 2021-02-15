@@ -10,14 +10,21 @@ import SwiftUI
 import SpriteKit
 
 struct GameView: View {
+    
+    @State var menuView: Bool = false
+    
     var body: some View {
-        ZStack {
-            SpriteKitInterface(scene: HistoryScene(level: "Reverse"))
-            Button(action: { NSApplication.shared.terminate(self) }, label: { Image(systemName: "xmark") })
-                .buttonStyle(PlainButtonStyle())
-                .imageScale(.large)
-                .foregroundColor(.red)
-                .position(x: 30, y: 30)
+        if menuView {
+            MenuView()
+        } else {
+            ZStack {
+                SpriteKitInterface(scene: HistoryScene(level: "Reverse"))
+                Button(action: { menuView.self.toggle() }, label: { Image(systemName: "xmark") })
+                    .buttonStyle(PlainButtonStyle())
+                    .imageScale(.large)
+                    .foregroundColor(.red)
+                    .position(x: 30, y: 30)
+            }
         }
     }
 }

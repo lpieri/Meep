@@ -21,8 +21,19 @@ struct OptionView: View {
                 NavigationView {
                     HStack {
                         List {
-                            Button(action: { self.menuView.toggle() }, label: { Text("<< Menu") }).buttonStyle(PlainButtonStyle())
+                            
+                            Button(action: {
+                                    self.menuView.toggle()
+                                
+                            }, label: {
+                                Image(systemName: "chevron.left.2")
+                                Text("Return")
+                            })
+                            .buttonStyle(PlainButtonStyle())
+                            .foregroundColor(.red)
+                            
                             NavigationLink(destination: KeysView(), label: { Text("Keys") })
+                            
                         }.listStyle(SidebarListStyle())
                             .font(.largeTitle)
                     }
