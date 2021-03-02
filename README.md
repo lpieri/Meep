@@ -6,6 +6,12 @@
 
 <h3 align="center">Meep is a game with two different worlds and only one mission.</h3>
 
+<p align="center">
+<a href="https://github.com/lpieri/meep/LICENSE"><img alt="Meep License" src="https://img.shields.io/github/license/lpieri/Meep" /></a>
+<a href="https://github.com/lpieri/meep/releases"><img alt="Meep Release" src="https://img.shields.io/github/v/release/lpieri/Meep" /></a>
+<a href="https://www.codefactor.io/repository/github/lpieri/meep"><img src="https://www.codefactor.io/repository/github/lpieri/meep/badge" alt="CodeFactor" /></a>
+</p>
+
 ---
 
 ## Description
