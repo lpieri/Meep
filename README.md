@@ -16,9 +16,9 @@
 
 ## Description
 
-Meep is a little blue monster, he lives in a universe where all monsters are blue, but Meep is not a monster like the others...
+Meep is a little blue ghost, he lives in a universe where all ghost are blue, but Meep is not a ghost like the others...
 
-Meep is a transgender monster... She dreams of becoming a pink monster in the other universe.
+Meep is a transgender ghost... She dreams of becoming a pink ghost in the other universe.
 
 ## Swift Student Challenge Result
 
@@ -26,7 +26,7 @@ Meep is one of the 350 winners !!
 
 ## Link
 
- - [Mac AppStore](https://apps.apple.com/us/app/meep-game/id1553783197)
+ - [Mac AppStore](https://apps.apple.com/us/app/meep-the-game/id1553783197)
 
 ## Next Change
 
