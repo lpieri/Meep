@@ -18,9 +18,13 @@ Meep is a transgender monster... She dreams of becoming a pink monster in the ot
 
 Meep is one of the 350 winners !!
 
+## Link
+
+ - [Mac AppStore](https://apps.apple.com/us/app/meep-game/id1553783197)
+
 ## Next Change
 
-Turning Meep into a macOS iOS application !
+ - Parallax Effect
 
 ## Preview
 
