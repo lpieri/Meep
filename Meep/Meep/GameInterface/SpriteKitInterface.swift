@@ -17,7 +17,7 @@ struct SpriteKitInterface: NSViewRepresentable {
     
     init(scene: SKScene) {
         skScene = scene
-        self.skScene.scaleMode = .resizeFill
+        self.skScene.scaleMode = .aspectFill
     }
     
     class Coordinator: NSObject {
@@ -32,9 +32,9 @@ struct SpriteKitInterface: NSViewRepresentable {
     
     func makeNSView(context: Context) -> SKView {
         let view = SKView(frame: .zero)
-        view.preferredFramesPerSecond = 60
-        view.showsFPS = true
-        view.showsNodeCount = true
+        view.preferredFramesPerSecond = 128
+        view.showsFPS = false
+        view.showsNodeCount = false
         
         return view
     }

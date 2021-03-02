@@ -254,7 +254,7 @@ public class ReverseWorld: SKScene, SKPhysicsContactDelegate {
 
     
     public override func update(_ currentTime: TimeInterval) {
-        self.scrollBackground()
+//        self.scrollBackground()
         player.physicsBody?.velocity.dx = 0
         if  player.position.x > -1536 && player.position.x < cameraNode.position.x && cameraMove == true {
             cameraNode.position = .init(x: player.position.x, y: 0)
