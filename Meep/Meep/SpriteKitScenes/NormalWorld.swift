@@ -254,7 +254,20 @@ public class NormalWorld: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    func scrollBackground() {
+        enumerateChildNodes(withName: "//Cloud") {
+            node, stop in
+            if let cloud = node as? SKSpriteNode {
+                cloud.position.x -= 3
+                if cloud.position.x < -(self.size.width / 2 + 200) {
+                    cloud.position.x = (self.size.width / 2 + 200)
+                }
+            }
+         }
+    }
+    
     public override func update(_ currentTime: TimeInterval) {
+        self.scrollBackground()
         player.physicsBody?.velocity.dx = 0
         if  player.position.x > -1536 && player.position.x < cameraNode.position.x && cameraMove == true {
             cameraNode.position = .init(x: player.position.x, y: 0)
