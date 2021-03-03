@@ -10,17 +10,17 @@ import SwiftUI
 
 struct MusicOptView: View {
     
-    @State var optionsView: Bool = false
+    @State var menuView: Bool = false
     @State var value: Double = 0
     
     var body: some View {
         ZStack {
-            if optionsView {
-                OptionView()
+            if menuView {
+                MenuView()
             } else {
                 ZStack {
                     Button(action: {
-                        optionsView.self.toggle()
+                        menuView.self.toggle()
                     }, label: {
                         Image(systemName: "chevron.left")
                     }).buttonStyle(PlainButtonStyle()).font(.largeTitle)

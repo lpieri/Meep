@@ -25,7 +25,6 @@
 		B7E3F21624F92994001DFD32 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7E3F21524F92994001DFD32 /* Assets.xcassets */; };
 		B7E3F21924F92994001DFD32 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7E3F21824F92994001DFD32 /* Preview Assets.xcassets */; };
 		B7E3F21C24F92994001DFD32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7E3F21A24F92994001DFD32 /* Main.storyboard */; };
-		B7E3F22524F93A23001DFD32 /* OptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E3F22424F93A23001DFD32 /* OptionView.swift */; };
 		B7E3F22724F94DA6001DFD32 /* KeysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E3F22624F94DA6001DFD32 /* KeysView.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,7 +50,6 @@
 		B7E3F21B24F92994001DFD32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B7E3F21D24F92994001DFD32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B7E3F21E24F92994001DFD32 /* Meep.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Meep.entitlements; sourceTree = "<group>"; };
-		B7E3F22424F93A23001DFD32 /* OptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionView.swift; sourceTree = "<group>"; };
 		B7E3F22624F94DA6001DFD32 /* KeysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeysView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,7 +78,6 @@
 			isa = PBXGroup;
 			children = (
 				B7E3F21324F92993001DFD32 /* MenuView.swift */,
-				B7E3F22424F93A23001DFD32 /* OptionView.swift */,
 				B7E3F22624F94DA6001DFD32 /* KeysView.swift */,
 				B70DA41025EF8B5200328504 /* MusicOptView.swift */,
 			);
@@ -227,7 +224,6 @@
 			files = (
 				B7E3F22724F94DA6001DFD32 /* KeysView.swift in Sources */,
 				B7E3F21424F92993001DFD32 /* MenuView.swift in Sources */,
-				B7E3F22524F93A23001DFD32 /* OptionView.swift in Sources */,
 				B7CCFC6225DABA1900DE0B48 /* NormalWorld.swift in Sources */,
 				B7CCFC6F25DABA5D00DE0B48 /* Credit.swift in Sources */,
 				B7CCFC6B25DABA4800DE0B48 /* GameOver.swift in Sources */,

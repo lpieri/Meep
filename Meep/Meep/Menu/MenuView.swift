@@ -10,13 +10,16 @@ import SwiftUI
 
 struct MenuView: View {
     
-    @State var optionView: Bool = false
+    @State var keyOption: Bool = false
+    @State var musicOpt: Bool = false
     @State var gameView: Bool = false
     
     var body: some View {
         ZStack {
-            if optionView {
-                OptionView()
+            if keyOption {
+                KeysView()
+            } else if musicOpt {
+                MusicOptView()
             } else if gameView {
                 GameView()
             } else {
@@ -24,7 +27,8 @@ struct MenuView: View {
                     Image("meep_logo")
                     VStack (alignment: .center, spacing: 10) {
                         Button(action: {gameView.self.toggle()}, label: {Text("Start Game")}).buttonStyle(PlainButtonStyle())
-                        Button(action: {self.optionView.toggle()}, label: {Text("Option")}).buttonStyle(PlainButtonStyle())
+                        Button(action: {self.keyOption.toggle()}, label: {Text("Keyboard")}).buttonStyle(PlainButtonStyle())
+                        Button(action: {self.musicOpt.toggle()}, label: {Text("Music")}).buttonStyle(PlainButtonStyle())
                         Button(action: {NSApplication.shared.terminate(self)}, label: {Text("Quit")}).buttonStyle(PlainButtonStyle())
                     }.padding(.vertical, 21.0)
                         .font(.largeTitle)
