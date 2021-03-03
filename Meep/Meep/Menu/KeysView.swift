@@ -9,14 +9,31 @@
 import SwiftUI
 
 struct KeysView: View {
+    
+    @State var optionsView: Bool = false
+    
     var body: some View {
         ZStack {
-            VStack {
-                Image("keys_logo")
-                Spacer()
-                Image("keyboard_touch")
-                Spacer()
-            }.padding()
+            if optionsView {
+                OptionView()
+            } else {
+                ZStack {
+                    Button(action: {
+                        optionsView.self.toggle()
+                    }, label: {
+                        Image(systemName: "chevron.left")
+                    }).buttonStyle(PlainButtonStyle()).font(.largeTitle)
+                    .foregroundColor(.red)
+                    .position(x: 30, y: 30)
+                    
+                    VStack {
+                        Image("keys_logo")
+                        Spacer()
+                        Image("keyboard_touch")
+                        Spacer()
+                    }.padding()
+                }
+            }
         }.frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }

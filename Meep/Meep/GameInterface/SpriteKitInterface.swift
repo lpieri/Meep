@@ -9,15 +9,22 @@
 import SwiftUI
 import SpriteKit
 import AppKit
+import AVKit
 
 struct SpriteKitInterface: NSViewRepresentable {
     
     typealias UIViewType = SKView
     var skScene: SKScene!
+    var songVol: Float!
+    var player: AVAudioPlayer!
+    let url = Bundle.main.url(forResource: "vlad-gluschenko-sea-breeze", withExtension: "mp3")!
     
-    init(scene: SKScene) {
+    
+    init(scene: SKScene, volume: Float) {
         skScene = scene
+        self.songVol = volume
         self.skScene.scaleMode = .aspectFill
+        self.player = try! AVAudioPlayer(contentsOf: self.url)
     }
     
     class Coordinator: NSObject {
@@ -35,7 +42,8 @@ struct SpriteKitInterface: NSViewRepresentable {
         view.preferredFramesPerSecond = 128
         view.showsFPS = false
         view.showsNodeCount = false
-        
+        player.volume = self.songVol!
+        player.play()
         return view
     }
     
