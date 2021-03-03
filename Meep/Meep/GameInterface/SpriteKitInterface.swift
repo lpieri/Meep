@@ -43,6 +43,7 @@ struct SpriteKitInterface: NSViewRepresentable {
         view.showsFPS = false
         view.showsNodeCount = false
         player.volume = self.songVol!
+        player.numberOfLoops = -1
         player.play()
         return view
     }
