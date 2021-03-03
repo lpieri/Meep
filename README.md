@@ -36,10 +36,12 @@ Meep is one of the 350 winners !!
 
 <h1 align="center">
 <br>
-<img src="assets/preview_world_2.png" alt="World 2"  width="400"/>
-<img src="assets/preview_world_1.png" alt="World 1"  width="400"/>
+<img src="assets/start-screen.png" alt="Start Screen"  width="400"/>
+<img src="assets/world-1-screen.png" alt="World 2"  width="400"/>
+<img src="assets/world-2-screen.png" alt="World 1"  width="400"/>
 <br>
 </h1>
+
 
 ## Contributor
 
