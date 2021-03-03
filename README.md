@@ -30,7 +30,7 @@ Meep is one of the 350 winners !!
 
 ## Next Change
 
- - Parallax Effect
+ - Keyboard menu
 
 ## Preview
 
