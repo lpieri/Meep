@@ -13,6 +13,6 @@ class MenuClass: ObservableObject {
     
     let didChange = PassthroughSubject<Void, Never>()
     
-    var volume: Double = 0.3 { didSet { didChange.send() } }
+    var volume: Double = 0.6 { didSet { didChange.send() } }
     
 }
