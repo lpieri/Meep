@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B70DA41125EF8B5200328504 /* MusicOptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70DA41025EF8B5200328504 /* MusicOptView.swift */; };
 		B70DA41425EF966D00328504 /* vlad-gluschenko-sea-breeze.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B70DA41325EF966D00328504 /* vlad-gluschenko-sea-breeze.mp3 */; };
+		B70DA41925EF9A7900328504 /* MenuClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70DA41825EF9A7900328504 /* MenuClass.swift */; };
 		B77C564525DAA8B00019C48D /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77C564425DAA8B00019C48D /* GameView.swift */; };
 		B77C564825DAA9370019C48D /* SpriteKitInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77C564725DAA9370019C48D /* SpriteKitInterface.swift */; };
 		B77C565325DAAE390019C48D /* HistoryScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77C565225DAAE390019C48D /* HistoryScene.swift */; };
@@ -31,6 +32,7 @@
 /* Begin PBXFileReference section */
 		B70DA41025EF8B5200328504 /* MusicOptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicOptView.swift; sourceTree = "<group>"; };
 		B70DA41325EF966D00328504 /* vlad-gluschenko-sea-breeze.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "vlad-gluschenko-sea-breeze.mp3"; sourceTree = "<group>"; };
+		B70DA41825EF9A7900328504 /* MenuClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuClass.swift; sourceTree = "<group>"; };
 		B77C564425DAA8B00019C48D /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		B77C564725DAA9370019C48D /* SpriteKitInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteKitInterface.swift; sourceTree = "<group>"; };
 		B77C565225DAAE390019C48D /* HistoryScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryScene.swift; sourceTree = "<group>"; };
@@ -64,6 +66,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B70DA41725EF9A6400328504 /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				B70DA41825EF9A7900328504 /* MenuClass.swift */,
+			);
+			path = Class;
+			sourceTree = "<group>";
+		};
 		B74C081E25DBF5B900F3B3BE /* GameInterface */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +136,7 @@
 		B7E3F21024F92993001DFD32 /* Meep */ = {
 			isa = PBXGroup;
 			children = (
+				B70DA41725EF9A6400328504 /* Class */,
 				B74C081E25DBF5B900F3B3BE /* GameInterface */,
 				B7CCFC7825DABC0700DE0B48 /* SpriteKitLevel */,
 				B77C564D25DAADEA0019C48D /* SpriteKitScenes */,
@@ -227,6 +238,7 @@
 				B7CCFC6225DABA1900DE0B48 /* NormalWorld.swift in Sources */,
 				B7CCFC6F25DABA5D00DE0B48 /* Credit.swift in Sources */,
 				B7CCFC6B25DABA4800DE0B48 /* GameOver.swift in Sources */,
+				B70DA41925EF9A7900328504 /* MenuClass.swift in Sources */,
 				B70DA41125EF8B5200328504 /* MusicOptView.swift in Sources */,
 				B7CCFC6825DABA3A00DE0B48 /* Player.swift in Sources */,
 				B77C564825DAA9370019C48D /* SpriteKitInterface.swift in Sources */,

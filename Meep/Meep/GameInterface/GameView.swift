@@ -11,6 +11,7 @@ import SpriteKit
 
 struct GameView: View {
     
+    @EnvironmentObject var menuData: MenuClass
     @State var menuView: Bool = false
     
     var body: some View {
@@ -18,7 +19,7 @@ struct GameView: View {
             MenuView()
         } else {
             ZStack {
-                SpriteKitInterface(scene: HistoryScene(level: "Reverse"), volume: 10.0)
+                SpriteKitInterface(scene: HistoryScene(level: "Reverse"), volume: Float(menuData.volume))
                 Button(action: { menuView.self.toggle() }, label: { Image(systemName: "xmark") })
                     .buttonStyle(PlainButtonStyle())
                     .imageScale(.large)

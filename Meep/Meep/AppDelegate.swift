@@ -13,11 +13,12 @@ import SwiftUI
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     var window: NSWindow!
+    let menuData = MenuClass()
 
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Create the SwiftUI view that provides the window contents.
-        let menuView = MenuView()
+        let menuView = MenuView().environmentObject(menuData)
 
         // Create the window and set the content view. 
         window = NSWindow(

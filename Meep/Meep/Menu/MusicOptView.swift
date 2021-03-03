@@ -10,6 +10,7 @@ import SwiftUI
 
 struct MusicOptView: View {
     
+    @EnvironmentObject var menuData: MenuClass
     @State var menuView: Bool = false
     @State var value: Double = 0
     
@@ -32,7 +33,7 @@ struct MusicOptView: View {
                         Text("Music Menu :").font(.largeTitle)
                         VStack(alignment: .leading, spacing: 5) {
                             Text("Volume :").font(.title)
-                            Slider(value: $value, in: 0...50, step: 1)
+                            Slider(value: $menuData.volume, in: 0...5, step: 0.3)
                         }.frame(width: 400, height: .none, alignment: .leading)
                         
                         Text("Music Credits :").font(.largeTitle)
