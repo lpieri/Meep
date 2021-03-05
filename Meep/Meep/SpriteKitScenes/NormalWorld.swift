@@ -15,6 +15,13 @@ public class NormalWorld: SKScene, SKPhysicsContactDelegate {
     public var player: Player!
     public var cameraMove: Bool!
     
+    public var lang: String?
+    
+    convenience init?(fileNamed: String, lang: String) {
+        self.init(fileNamed: fileNamed)
+        self.lang = lang
+    }
+    
     public override func didMove(to view: SKView) {
         
         self.size = CGSize(width: 4096, height: 768)
@@ -130,7 +137,7 @@ public class NormalWorld: SKScene, SKPhysicsContactDelegate {
         if let name = contact.bodyA.node?.name {
             if name == "Spade" {
                 if player.numberOfLife - 1 == 0 {
-                    let newScene = GameOver(level: "Normal")
+                    let newScene = GameOver(level: "Normal", lang: self.lang!)
                     self.scene?.view?.presentScene(newScene, transition: .fade(withDuration: 1))
                 } else {
                     let heart = childNode(withName: "//Heart\(player.numberOfLife)") as! SKSpriteNode

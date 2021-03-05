@@ -15,15 +15,21 @@ public class GameOver: SKScene {
     private let label: SKLabelNode
     private let respawnMessage: String
     private let level: String
+    private var lang: String
     
-    public init(level: String) {
-        self.respawnMessage = "Press space to respawn..."
+    public init(level: String, lang: String) {
+        if lang == "fr" {
+            respawnMessage = "Appuyer sur espace pour réapparaître..."
+        } else {
+            respawnMessage = "Press space to respawn..."
+        }
         self.label = SKLabelNode(text: self.respawnMessage)
         let logo = SKSpriteNode(imageNamed: "textureGameOver")
         let floor = SKSpriteNode(imageNamed: "textureFloor")
         self.rip = SKSpriteNode(imageNamed: "textureRip")
         self.ghost = SKSpriteNode(imageNamed: "textureGhost")
         self.level = level
+        self.lang = lang
         super.init(size: CGSize(width: 1024, height: 768))
         self.label.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 250)
         self.label.alpha = 0
@@ -58,7 +64,7 @@ public class GameOver: SKScene {
     }
     
     public func changeScene() {
-        let newScene = HistoryScene(level: self.level)
+        let newScene = HistoryScene(level: self.level, lang: self.lang)
         self.scene?.view?.presentScene(newScene, transition: .fade(withDuration: 1))
     }
     

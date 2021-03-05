@@ -16,6 +16,12 @@ public class ReverseWorld: SKScene, SKPhysicsContactDelegate {
     public var cameraNode: SKCameraNode!
     public var cameraMove: Bool!
     public var player: Player!
+    public var lang: String?
+
+    convenience init?(fileNamed: String, lang: String) {
+        self.init(fileNamed: fileNamed)
+        self.lang = lang
+    }
     
     public override func didMove(to view: SKView) {
         
@@ -136,11 +142,11 @@ public class ReverseWorld: SKScene, SKPhysicsContactDelegate {
                     }
                 }
             } else if name == "TimeRift" && player.getKey == true {
-                let newScene = HistoryScene(level: "Normal")
+                let newScene = HistoryScene(level: "Normal", lang: self.lang!)
                 self.scene?.view?.presentScene(newScene, transition: .fade(withDuration: 1))
             } else if name == "Spade" {
                 if player.numberOfLife - 1 == 0 {
-                    let newScene = GameOver(level: "Reverse")
+                    let newScene = GameOver(level: "Reverse", lang: self.lang!)
                     self.scene?.view?.presentScene(newScene, transition: .fade(withDuration: 1))
                 } else {
                     let heart = childNode(withName: "//Heart\(player.numberOfLife)") as! SKSpriteNode

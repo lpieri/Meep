@@ -19,7 +19,7 @@ struct GameView: View {
             MenuView()
         } else {
             ZStack {
-                SpriteKitInterface(scene: HistoryScene(level: "Reverse"), volume: Float(menuData.volume))
+                SpriteKitInterface(scene: HistoryScene(level: "Reverse", lang: menuData.lang), volume: Float(menuData.volume))
                 Button(action: { menuView.self.toggle() }, label: { Image(systemName: "xmark") })
                     .buttonStyle(PlainButtonStyle())
                     .imageScale(.large)

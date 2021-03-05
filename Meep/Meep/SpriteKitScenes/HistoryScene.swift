@@ -8,8 +8,8 @@
 
 import SpriteKit
 
-let reverseLevelText = """
-Meep is a little blue monster.
+let reverseLevelTextEn = """
+Meep is a little blue ghost.
 He lives in a universe where all monsters are blue,
 but Meep is not a monster like the others...
 
@@ -20,7 +20,7 @@ She knows how to go to the other universe, where everything is upside down.
 To get to the other universe, she has to cross a locked time rift.
 """
 
-let normalLevelText = """
+let normalLevelTextEn = """
 Meep found the temporal rift and arrived in the universe of the pink monsters.
 
 But Meep's adventure had just begun...
@@ -28,14 +28,46 @@ Meep must now integrate into the world of the pink monsters.
 For this, Meep will have to make a blend to become a pink monster too.
 """
 
+let reverseLevelTextFr = """
+Meep est un petit être bleu.
+Il vie dans un univers ou tous les êtres sont bleu,
+Mais Meep est pas un être comme les autres...
+
+Meep est transgenre...
+Son rêve est devenir un être rose dans un autre univers.
+Elle connaît comment aller dans l'autre univers, ou tout est à l'envers.
+
+Pour aller dans l'autre univers, elle doit prendre une faille temporail.
+"""
+
+let normalLevelTextFr = """
+Meep à trouver la fail temporail et vient d'arriver dans l'univers ou tout les êtres sont rose.
+
+Mais l'aventure de Meep ne fait que commencer...
+Meep doit maintenant s'intégrer dans ce nouveau monde.
+Pour cela, Meep doit devenir elle même un être rose.
+"""
+
 public class HistoryScene: SKScene {
 
     private let currentLevel: String
     private let continueMessage: String
+    private let historyText: String
     private let label: SKLabelNode
+    private var lang: String
     
-    public init(level: String) {
-        continueMessage = "Press space to continue..."
+    public init(level: String, lang: String) {
+        self.lang = lang
+        if lang == "fr" {
+            continueMessage = "Appuyer sur espace pour continuer..."
+        } else {
+            continueMessage = "Press space to continue..."
+        }
+        if lang == "fr" {
+            historyText = (level == "Reverse") ? reverseLevelTextFr : normalLevelTextFr
+        } else {
+            historyText = (level == "Reverse") ? reverseLevelTextEn : normalLevelTextEn
+        }
         let size = CGSize(width: 1024, height: 768)
         self.currentLevel = level
         self.label = SKLabelNode(text: self.continueMessage)
@@ -45,7 +77,6 @@ public class HistoryScene: SKScene {
         self.label.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 300)
         self.label.alpha = 0
         self.addChild(self.label)
-        let historyText = (level == "Reverse") ? reverseLevelText : normalLevelText
         let historyLabel = SKLabelNode(text: historyText)
         historyLabel.lineBreakMode = .byCharWrapping
         historyLabel.numberOfLines = 9
@@ -67,9 +98,9 @@ public class HistoryScene: SKScene {
     public func changeScene(level: String) {
         var newScene: SKScene
         if currentLevel == "Reverse" {
-            newScene = ReverseWorld(fileNamed: "levelReverse")!
+            newScene = ReverseWorld(fileNamed: "levelReverse", lang: self.lang)!
         } else {
-            newScene = NormalWorld(fileNamed: "levelNormal")!
+            newScene = NormalWorld(fileNamed: "levelNormal", lang: self.lang)!
         }
         self.scene?.view?.presentScene(newScene, transition: .fade(withDuration: 1))
     }
