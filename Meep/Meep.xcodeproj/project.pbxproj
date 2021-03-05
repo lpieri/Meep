@@ -10,6 +10,7 @@
 		B70DA41125EF8B5200328504 /* MusicOptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70DA41025EF8B5200328504 /* MusicOptView.swift */; };
 		B70DA41425EF966D00328504 /* vlad-gluschenko-sea-breeze.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B70DA41325EF966D00328504 /* vlad-gluschenko-sea-breeze.mp3 */; };
 		B70DA41925EF9A7900328504 /* MenuClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70DA41825EF9A7900328504 /* MenuClass.swift */; };
+		B77A8A9825F298ED004353B3 /* LanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77A8A9725F298ED004353B3 /* LanguageView.swift */; };
 		B77C564525DAA8B00019C48D /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77C564425DAA8B00019C48D /* GameView.swift */; };
 		B77C564825DAA9370019C48D /* SpriteKitInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77C564725DAA9370019C48D /* SpriteKitInterface.swift */; };
 		B77C565325DAAE390019C48D /* HistoryScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77C565225DAAE390019C48D /* HistoryScene.swift */; };
@@ -33,6 +34,7 @@
 		B70DA41025EF8B5200328504 /* MusicOptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicOptView.swift; sourceTree = "<group>"; };
 		B70DA41325EF966D00328504 /* vlad-gluschenko-sea-breeze.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "vlad-gluschenko-sea-breeze.mp3"; sourceTree = "<group>"; };
 		B70DA41825EF9A7900328504 /* MenuClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuClass.swift; sourceTree = "<group>"; };
+		B77A8A9725F298ED004353B3 /* LanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageView.swift; sourceTree = "<group>"; };
 		B77C564425DAA8B00019C48D /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		B77C564725DAA9370019C48D /* SpriteKitInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteKitInterface.swift; sourceTree = "<group>"; };
 		B77C565225DAAE390019C48D /* HistoryScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryScene.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				B7E3F21324F92993001DFD32 /* MenuView.swift */,
 				B7E3F22624F94DA6001DFD32 /* KeysView.swift */,
 				B70DA41025EF8B5200328504 /* MusicOptView.swift */,
+				B77A8A9725F298ED004353B3 /* LanguageView.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 				B7E3F21424F92993001DFD32 /* MenuView.swift in Sources */,
 				B7CCFC6225DABA1900DE0B48 /* NormalWorld.swift in Sources */,
 				B7CCFC6F25DABA5D00DE0B48 /* Credit.swift in Sources */,
+				B77A8A9825F298ED004353B3 /* LanguageView.swift in Sources */,
 				B7CCFC6B25DABA4800DE0B48 /* GameOver.swift in Sources */,
 				B70DA41925EF9A7900328504 /* MenuClass.swift in Sources */,
 				B70DA41125EF8B5200328504 /* MusicOptView.swift in Sources */,

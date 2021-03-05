@@ -10,9 +10,11 @@ import SwiftUI
 
 struct MenuView: View {
     
+    @EnvironmentObject var menuData: MenuClass
     @State var keyOption: Bool = false
     @State var musicOpt: Bool = false
     @State var gameView: Bool = false
+    @State var langView: Bool = false
     
     var body: some View {
         ZStack {
@@ -22,16 +24,53 @@ struct MenuView: View {
                 MusicOptView()
             } else if gameView {
                 GameView()
+            } else if langView {
+                LanguageView()
             } else {
                 VStack {
                     Image("meep_logo")
                     VStack (alignment: .center, spacing: 10) {
-                        Button(action: {gameView.self.toggle()}, label: {Text("Start Game")}).buttonStyle(PlainButtonStyle())
-                        Button(action: {self.keyOption.toggle()}, label: {Text("Keyboard")}).buttonStyle(PlainButtonStyle())
-                        Button(action: {self.musicOpt.toggle()}, label: {Text("Music")}).buttonStyle(PlainButtonStyle())
-                        Button(action: {NSApplication.shared.terminate(self)}, label: {Text("Quit")}).buttonStyle(PlainButtonStyle())
-                    }.padding(.vertical, 21.0)
-                        .font(.largeTitle)
+                        
+                        Button(action: { gameView.self.toggle() }, label: {
+                            if menuData.lang == "fr" {
+                                Text(MenuClass.Fr.startGame.rawValue)
+                            } else {
+                                Text(MenuClass.En.startGame.rawValue)
+                            }
+                        })
+                        
+                        Button(action: { self.langView.toggle() }, label: {
+                            if menuData.lang == "fr" {
+                                Text(MenuClass.Fr.lang.rawValue)
+                            } else {
+                                Text(MenuClass.En.lang.rawValue)
+                            }
+                        })
+                        
+                        Button(action: { self.keyOption.toggle() }, label: {
+                            if menuData.lang == "fr" {
+                                Text(MenuClass.Fr.key.rawValue)
+                            } else {
+                                Text(MenuClass.En.key.rawValue)
+                            }
+                        })
+                        
+                        Button(action: { self.musicOpt.toggle() }, label: {
+                            if menuData.lang == "fr" {
+                                Text(MenuClass.Fr.music.rawValue)
+                            } else {
+                                Text(MenuClass.En.music.rawValue)
+                            }
+                        })
+                        
+                        Button(action: { NSApplication.shared.terminate(self) }, label: {
+                            if menuData.lang == "fr" {
+                                Text(MenuClass.Fr.exit.rawValue)
+                            } else {
+                                Text(MenuClass.En.exit.rawValue)
+                            }
+                        })
+                    }.padding(.vertical, 21.0).font(.largeTitle).buttonStyle(PlainButtonStyle())
                     
                 }
             }

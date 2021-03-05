@@ -30,13 +30,21 @@ struct MusicOptView: View {
                     
                     VStack(alignment: .center, spacing: 10) {
                         Spacer()
-                        Text("Music Menu :").font(.largeTitle)
+                        if menuData.lang == "fr" {
+                            Text(MenuClass.Fr.menuTitleMusic.rawValue).font(.largeTitle)
+                        } else {
+                            Text(MenuClass.En.menuTitleMusic.rawValue).font(.largeTitle)
+                        }
                         VStack(alignment: .leading, spacing: 5) {
                             Text("Volume :").font(.title)
                             Slider(value: $menuData.volume, in: 0...5, step: 0.3)
                         }.frame(width: 400, height: .none, alignment: .leading)
                         
-                        Text("Music Credits :").font(.largeTitle)
+                        if menuData.lang == "fr" {
+                            Text(MenuClass.Fr.menuTitleCredits.rawValue).font(.largeTitle)
+                        } else {
+                            Text(MenuClass.En.menuTitleCredits.rawValue).font(.largeTitle)
+                        }
                         VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 5) {
                             Text("Sea Breeze by Vlad Gluschenko | https://soundcloud.com/vgl9").font(.headline)
                             Text("Music promoted by https://www.free-stock-music.com").font(.headline)

@@ -33,6 +33,43 @@ class MenuClass: ObservableObject {
     let didChange = PassthroughSubject<Void, Never>()
     
     var volume: Double = 0.6 { didSet { didChange.send() } }
+    var lang: String = "en" { didSet { didChange.send() } }
+    
+    enum Fr: String {
+        case startGame = "Commencer le jeu"
+        case lang = "Language"
+        case key = "Clavier"
+        case music = "Audio"
+        case exit = "Quitter"
+        case menuTitleKey = "Menu du Clavier :"
+        case menuTitleMusic = "Menu Audio :"
+        case menuTitleLang = "Menu Language :"
+        case menuTitleCredits = "Crédits Musicaux :"
+        case touchJump = "Saut :"
+        case touchCrouch = "S'accroupir :"
+        case touchRunRight = "Courir à droite :"
+        case touchRunLeft = "Courir à gauche :"
+        case touchDiagJumpLeft = "Saut diagonale à gauche :"
+        case touchDiagJumpRight = "Saut diagonale à droite :"
+    }
+    
+    enum En: String {
+        case startGame = "Start Game"
+        case lang = "Language"
+        case key = "Keyboard"
+        case music = "Audio"
+        case exit = "Quit"
+        case menuTitleKey = "Keyboard Menu :"
+        case menuTitleMusic = "Audio Menu :"
+        case menuTitleLang = "Language Menu :"
+        case menuTitleCredits = "Music Credits :"
+        case touchJump = "Jump :"
+        case touchCrouch = "Crouch :"
+        case touchRunRight = "Run Right :"
+        case touchRunLeft = "Run Left :"
+        case touchDiagJumpLeft = "Diagonal jump left :"
+        case touchDiagJumpRight = "Diagonal jump right :"
+    }
     
     var jump: UInt16 = macOSDefaultKey.upArrow.rawValue { didSet { didChange.send() } }
     var crouch: UInt16 = macOSDefaultKey.downArrow.rawValue { didSet { didChange.send() } }

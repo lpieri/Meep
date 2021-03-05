@@ -40,10 +40,18 @@ struct KeysView: View {
                     
                     VStack(alignment: .center, spacing: 20) {
                         Spacer()
-                        Text("Keyboard Menu :").font(.largeTitle)
+                        if menuData.lang == "fr" {
+                            Text(MenuClass.Fr.menuTitleKey.rawValue)
+                        } else {
+                            Text(MenuClass.En.menuTitleKey.rawValue)
+                        }
                         VStack(alignment: .center, spacing: 5) {
                             HStack(alignment: .center) {
-                                Text("Jump:").font(.title)
+                                if menuData.lang == "fr" {
+                                    Text(MenuClass.Fr.touchJump.rawValue)
+                                } else {
+                                    Text(MenuClass.En.touchJump.rawValue)
+                                }
                                 Spacer()
                                 Button("Up Arrow", action: {
                                     changeKey(touch: "jump")
@@ -53,43 +61,66 @@ struct KeysView: View {
                                 }
                             }
                             HStack(alignment: .center) {
-                                Text("Crouch:").font(.title)
+                                if menuData.lang == "fr" {
+                                    Text(MenuClass.Fr.touchCrouch.rawValue)
+                                } else {
+                                    Text(MenuClass.En.touchCrouch.rawValue)
+                                }
                                 Spacer()
                                 Button("Down Arrow", action: {
                                     changeKey(touch: "crouch")
                                 })
                             }
                             HStack(alignment: .center) {
-                                Text("Run Right:").font(.title)
+                                if menuData.lang == "fr" {
+                                    Text(MenuClass.Fr.touchRunRight.rawValue)
+                                } else {
+                                    Text(MenuClass.En.touchRunRight.rawValue)
+                                }
                                 Spacer()
                                 Button("Right Arrow", action: {
                                     changeKey(touch: "run-right")
                                 })
                             }
                             HStack(alignment: .center) {
-                                Text("Run Left:").font(.title)
+                                if menuData.lang == "fr" {
+                                    Text(MenuClass.Fr.touchRunLeft.rawValue)
+                                } else {
+                                    Text(MenuClass.En.touchRunLeft.rawValue)
+                                }
                                 Spacer()
                                 Button("Left Arrow", action: {
                                     changeKey(touch: "run-left")
                                 })
                             }
                             HStack(alignment: .center) {
-                                Text("Diagonal jump left:").font(.title)
+                                if menuData.lang == "fr" {
+                                    Text(MenuClass.Fr.touchDiagJumpLeft.rawValue)
+                                } else {
+                                    Text(MenuClass.En.touchDiagJumpLeft.rawValue)
+                                }
                                 Spacer()
                                 Button("Z Touch", action: {
                                     changeKey(touch: "diag-jump-left")
                                 })
                             }
                             HStack(alignment: .center) {
-                                Text("Diagonal jump right:").font(.title)
+                                if menuData.lang == "fr" {
+                                    Text(MenuClass.Fr.touchDiagJumpRight.rawValue)
+                                } else {
+                                    Text(MenuClass.En.touchDiagJumpRight.rawValue)
+                                }
                                 Spacer()
                                 Button("X Touch", action: {
                                     changeKey(touch: "diag-jump-right")
                                 })
                             }
                         }.frame(width: 400, height: .none, alignment: .center)
+                        .buttonStyle(PlainButtonStyle())
                         Spacer()
+                        
                     }.padding()
+                    .font(.largeTitle)
                 }
             }
         }.frame(maxWidth: .infinity, maxHeight: .infinity)
