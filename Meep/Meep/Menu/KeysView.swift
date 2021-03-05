@@ -10,14 +10,17 @@ import SwiftUI
 
 struct KeysView: View {
     
+    @EnvironmentObject var menuData: MenuClass
     @State var menuView: Bool = false
     @State var changeTouch: Bool = false
+    @State var textAlert = "Presse touch..."
     
     func changeKey(touch: String) {
         self.changeTouch.toggle()
         if changeTouch {
+            menuData.ChangeKey(name: touch, event: NSApplication.shared.nextEvent(matching: .keyDown, until: .distantFuture, inMode: .eventTracking, dequeue: .init())!)
+            self.textAlert = "It's done !!"
             print("touch:", touch, changeTouch)
-            self.changeTouch.toggle()
         }
     }
     
@@ -45,6 +48,9 @@ struct KeysView: View {
                                 Button("Up Arrow", action: {
                                     changeKey(touch: "jump")
                                 })
+                                if changeTouch {
+                                    Text(self.textAlert)
+                                }
                             }
                             HStack(alignment: .center) {
                                 Text("Crouch:").font(.title)
