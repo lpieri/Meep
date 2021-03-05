@@ -37,11 +37,11 @@ Meep est transgenre...
 Son rêve est devenir un être rose dans un autre univers.
 Elle connaît comment aller dans l'autre univers, ou tout est à l'envers.
 
-Pour aller dans l'autre univers, elle doit prendre une faille temporail.
+Pour aller dans l'autre univers, elle doit prendre une faille temporelle.
 """
 
 let normalLevelTextFr = """
-Meep à trouver la fail temporail et vient d'arriver dans l'univers ou tout les êtres sont rose.
+Meep a traversé la faille et vient d'arriver dans l'univers des êtres rose.
 
 Mais l'aventure de Meep ne fait que commencer...
 Meep doit maintenant s'intégrer dans ce nouveau monde.
