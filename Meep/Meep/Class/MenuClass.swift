@@ -117,8 +117,8 @@ class MenuClass: ObservableObject {
         Touch(id: 1, name: "Crouch :", slug: touchSlug.crouch.rawValue, touch: En.downArrow.rawValue),
         Touch(id: 2, name: "Run Right :", slug: touchSlug.runRight.rawValue, touch: En.rightArrow.rawValue),
         Touch(id: 3, name: "Run Left :", slug: touchSlug.runLeft.rawValue, touch: En.leftArrow.rawValue),
-        Touch(id: 4, name: "Diagonal jump left :", slug: "diag-jump-left", touch: "Touch Z"),
-        Touch(id: 5, name: "Diagonal jump right :", slug: "diag-jump-right", touch: "Touch X")
+        Touch(id: 4, name: "Diagonal jump left :", slug: "diag-jump-left", touch: "Key Z"),
+        Touch(id: 5, name: "Diagonal jump right :", slug: "diag-jump-right", touch: "Key X")
     ] { didSet { didChange.send() } }
     
     var volume: Double = 0.6 { didSet { didChange.send() } }
@@ -165,7 +165,7 @@ class MenuClass: ObservableObject {
                 touchsEn[i].touch = En.rightArrow.rawValue
             default:
                 touchsFr[i].touch = "Touche " + char.uppercased()
-                touchsEn[i].touch = "Touch " + char.uppercased()
+                touchsEn[i].touch = "Key " + char.uppercased()
             }
         }
         return
