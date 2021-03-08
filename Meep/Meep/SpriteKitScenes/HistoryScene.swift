@@ -30,18 +30,18 @@ For this, Meep will have to make a blend to become a pink monster too.
 
 let reverseLevelTextFr = """
 Meep est un petit être bleu.
-Il vie dans un univers ou tous les êtres sont bleu,
-Mais Meep est pas un être comme les autres...
+Il vie dans un univers ou tous les êtres sont bleus,
+Mais Meep n'est pas un être comme les autres...
 
 Meep est transgenre...
 Son rêve est devenir un être rose dans un autre univers.
-Elle connaît comment aller dans l'autre univers, ou tout est à l'envers.
+Elle sait comment aller dans l'autre univers, ou tout est à l'endroit.
 
 Pour aller dans l'autre univers, elle doit prendre une faille temporelle.
 """
 
 let normalLevelTextFr = """
-Meep a traversé la faille et vient d'arriver dans l'univers des êtres rose.
+Meep a traversé la faille et vient d'arriver dans l'univers des êtres roses.
 
 Mais l'aventure de Meep ne fait que commencer...
 Meep doit maintenant s'intégrer dans ce nouveau monde.
