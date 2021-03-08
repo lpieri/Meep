@@ -46,73 +46,25 @@ struct KeysView: View {
                             Text(MenuClass.En.menuTitleKey.rawValue)
                         }
                         VStack(alignment: .center, spacing: 5) {
-                            HStack(alignment: .center) {
-                                if menuData.lang == "fr" {
-                                    Text(MenuClass.Fr.touchJump.rawValue)
-                                } else {
-                                    Text(MenuClass.En.touchJump.rawValue)
-                                }
-                                Spacer()
-                                Button("Up Arrow", action: {
-                                    changeKey(touch: "jump")
+                            if menuData.lang == "fr" {
+                                ForEach(menuData.touchsFr, content: { touch in
+                                    HStack(alignment: .center) {
+                                        Text(touch.name)
+                                        Spacer()
+                                        Button(touch.touch, action: {
+                                            changeKey(touch: touch.slug)
+                                        }).font(.title)
+                                    }
                                 })
-                                if changeTouch {
-                                    Text(self.textAlert)
-                                }
-                            }
-                            HStack(alignment: .center) {
-                                if menuData.lang == "fr" {
-                                    Text(MenuClass.Fr.touchCrouch.rawValue)
-                                } else {
-                                    Text(MenuClass.En.touchCrouch.rawValue)
-                                }
-                                Spacer()
-                                Button("Down Arrow", action: {
-                                    changeKey(touch: "crouch")
-                                })
-                            }
-                            HStack(alignment: .center) {
-                                if menuData.lang == "fr" {
-                                    Text(MenuClass.Fr.touchRunRight.rawValue)
-                                } else {
-                                    Text(MenuClass.En.touchRunRight.rawValue)
-                                }
-                                Spacer()
-                                Button("Right Arrow", action: {
-                                    changeKey(touch: "run-right")
-                                })
-                            }
-                            HStack(alignment: .center) {
-                                if menuData.lang == "fr" {
-                                    Text(MenuClass.Fr.touchRunLeft.rawValue)
-                                } else {
-                                    Text(MenuClass.En.touchRunLeft.rawValue)
-                                }
-                                Spacer()
-                                Button("Left Arrow", action: {
-                                    changeKey(touch: "run-left")
-                                })
-                            }
-                            HStack(alignment: .center) {
-                                if menuData.lang == "fr" {
-                                    Text(MenuClass.Fr.touchDiagJumpLeft.rawValue)
-                                } else {
-                                    Text(MenuClass.En.touchDiagJumpLeft.rawValue)
-                                }
-                                Spacer()
-                                Button("Z Touch", action: {
-                                    changeKey(touch: "diag-jump-left")
-                                })
-                            }
-                            HStack(alignment: .center) {
-                                if menuData.lang == "fr" {
-                                    Text(MenuClass.Fr.touchDiagJumpRight.rawValue)
-                                } else {
-                                    Text(MenuClass.En.touchDiagJumpRight.rawValue)
-                                }
-                                Spacer()
-                                Button("X Touch", action: {
-                                    changeKey(touch: "diag-jump-right")
+                            } else {
+                                ForEach(menuData.touchsEn, content: { touch in
+                                    HStack(alignment: .center) {
+                                        Text(touch.name)
+                                        Spacer()
+                                        Button(touch.touch, action: {
+                                            changeKey(touch: touch.slug)
+                                        }).font(.title)
+                                    }
                                 })
                             }
                         }.frame(width: 400, height: .none, alignment: .center)

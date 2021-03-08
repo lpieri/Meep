@@ -35,6 +35,45 @@ class MenuClass: ObservableObject {
     var volume: Double = 0.6 { didSet { didChange.send() } }
     var lang: String = "en" { didSet { didChange.send() } }
     
+    struct Touch: Identifiable {
+        var id: NSNumber
+        var name: String
+        var slug: String
+        var touch: String
+        
+        init () {
+            self.id = NSNumber(0)
+            self.name = "default"
+            self.slug = "default"
+            self.touch = "default"
+        }
+            
+        init (id: NSNumber, name: String, slug: String, touch: String) {
+            self.id = id
+            self.name = name
+            self.slug = slug
+            self.touch = touch
+        }
+    }
+    
+    var touchsFr: [Touch] = [
+        Touch(id: 0, name: "Saut :", slug: "jump", touch: "Flèche du haut"),
+        Touch(id: 1, name: "S'accroupir :", slug: "crouch", touch: "Flèche du bas"),
+        Touch(id: 2, name: "Courir à droite :", slug: "run-right", touch: "Flèche de droite"),
+        Touch(id: 3, name: "Courir à gauche :", slug: "run-left", touch: "Flèche de gauche"),
+        Touch(id: 4, name: "Saut diagonale à gauche :", slug: "diag-jump-left", touch: "Touche Z"),
+        Touch(id: 6, name: "Saut diagonale à droite :", slug: "diag-jump-right", touch: "Touche X")
+    ] { didSet { didChange.send() } }
+
+    var touchsEn: [Touch] = [
+        Touch(id: 0, name: "Jump :", slug: "jump", touch: "Up Arrow"),
+        Touch(id: 1, name: "Crouch :", slug: "crouch", touch: "Down Arrow"),
+        Touch(id: 2, name: "Run Right :", slug: "run-right", touch: "Right Arrow"),
+        Touch(id: 3, name: "Run Left :", slug: "run-left", touch: "Left Arrow"),
+        Touch(id: 4, name: "Diagonal jump left :", slug: "diag-jump-left", touch: "Touch Z"),
+        Touch(id: 6, name: "Diagonal jump right :", slug: "diag-jump-right", touch: "Touch X")
+    ] { didSet { didChange.send() } }
+    
     enum Fr: String {
         case startGame = "Commencer le jeu"
         case lang = "Language"
@@ -45,12 +84,6 @@ class MenuClass: ObservableObject {
         case menuTitleMusic = "Menu Audio :"
         case menuTitleLang = "Menu Language :"
         case menuTitleCredits = "Crédits Musicaux :"
-        case touchJump = "Saut :"
-        case touchCrouch = "S'accroupir :"
-        case touchRunRight = "Courir à droite :"
-        case touchRunLeft = "Courir à gauche :"
-        case touchDiagJumpLeft = "Saut diagonale à gauche :"
-        case touchDiagJumpRight = "Saut diagonale à droite :"
     }
     
     enum En: String {
@@ -63,12 +96,6 @@ class MenuClass: ObservableObject {
         case menuTitleMusic = "Audio Menu :"
         case menuTitleLang = "Language Menu :"
         case menuTitleCredits = "Music Credits :"
-        case touchJump = "Jump :"
-        case touchCrouch = "Crouch :"
-        case touchRunRight = "Run Right :"
-        case touchRunLeft = "Run Left :"
-        case touchDiagJumpLeft = "Diagonal jump left :"
-        case touchDiagJumpRight = "Diagonal jump right :"
     }
     
     var jump: UInt16 = macOSDefaultKey.upArrow.rawValue { didSet { didChange.send() } }
