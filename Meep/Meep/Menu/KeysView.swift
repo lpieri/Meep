@@ -18,7 +18,7 @@ struct KeysView: View {
     func changeKey(touch: String) {
         self.changeTouch.toggle()
         if changeTouch {
-            menuData.mapping.ChangeKey(slug: touch, event: NSApplication.shared.nextEvent(matching: .keyDown, until: .distantFuture, inMode: .eventTracking, dequeue: .init())!)
+            menuData.ChangeKey(slug: touch, event: NSApplication.shared.nextEvent(matching: .keyDown, until: .distantFuture, inMode: .eventTracking, dequeue: .init())!)
             self.textAlert = "It's done !!"
             print("touch:", touch, changeTouch)
         }

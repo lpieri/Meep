@@ -9,28 +9,28 @@
 import Combine
 import SwiftUI
 
-enum macOSDefaultKey: UInt16 {
-    case touchZ = 6
-    case touchX = 7
-    case leftArrow = 123
-    case rightArrow = 124
-    case upArrow = 126
-    case downArrow = 125
-    case space = 49
-}
-
-enum touchName: String {
-    case jump = "jump"
-    case crouch = "crouch"
-    case runRight = "run-right"
-    case runLeft = "run-left"
-    case diagJumpLeft = "diag-jump-left"
-    case diagJumpRight = "diag-jump-right"
-}
-
 class MenuClass: ObservableObject {
     
     let didChange = PassthroughSubject<Void, Never>()
+    
+    enum macOSDefaultKey: UInt16 {
+        case touchZ = 6
+        case touchX = 7
+        case leftArrow = 123
+        case rightArrow = 124
+        case upArrow = 126
+        case downArrow = 125
+        case space = 49
+    }
+    
+    enum touchSlug: String {
+        case jump = "jump"
+        case crouch = "crouch"
+        case runRight = "run-right"
+        case runLeft = "run-left"
+        case diagJumpLeft = "diag-jump-left"
+        case diagJumpRight = "diag-jump-right"
+    }
     
     enum Fr: String {
         case startGame = "Commencer le jeu"
@@ -42,6 +42,10 @@ class MenuClass: ObservableObject {
         case menuTitleMusic = "Menu Audio :"
         case menuTitleLang = "Menu Language :"
         case menuTitleCredits = "Crédits Musicaux :"
+        case upArrow = "Flèche du haut"
+        case downArrow = "Flèche du bas"
+        case rightArrow = "Flèche de droite"
+        case leftArrow = "Flèche de gauche"
     }
     
     enum En: String {
@@ -54,6 +58,10 @@ class MenuClass: ObservableObject {
         case menuTitleMusic = "Audio Menu :"
         case menuTitleLang = "Language Menu :"
         case menuTitleCredits = "Music Credits :"
+        case upArrow = "Up Arrow"
+        case downArrow = "Down Arrow"
+        case rightArrow = "Right Arrow"
+        case leftArrow = "Left Arrow"
     }
     
     struct Mapping {
@@ -71,26 +79,6 @@ class MenuClass: ObservableObject {
             self.runLeft = macOSDefaultKey.leftArrow.rawValue
             self.diagJumpLeft = macOSDefaultKey.touchZ.rawValue
             self.diagJumpRight = macOSDefaultKey.touchX.rawValue
-        }
-        
-        mutating func ChangeKey(slug: String, event: NSEvent) {
-            switch slug {
-            case touchName.jump.rawValue:
-                self.jump = event.keyCode
-            case touchName.crouch.rawValue:
-                self.crouch = event.keyCode
-            case touchName.runLeft.rawValue:
-                self.runLeft = event.keyCode
-            case touchName.runRight.rawValue:
-                self.runRight = event.keyCode
-            case touchName.diagJumpLeft.rawValue:
-                self.diagJumpLeft = event.keyCode
-            case touchName.diagJumpRight.rawValue:
-                self.diagJumpRight = event.keyCode
-            default:
-                return
-            }
-            return
         }
     }
     
@@ -116,25 +104,71 @@ class MenuClass: ObservableObject {
     }
     
     var touchsFr: [Touch] = [
-        Touch(id: 0, name: "Saut :", slug: "jump", touch: "Flèche du haut"),
-        Touch(id: 1, name: "S'accroupir :", slug: "crouch", touch: "Flèche du bas"),
-        Touch(id: 2, name: "Courir à droite :", slug: "run-right", touch: "Flèche de droite"),
-        Touch(id: 3, name: "Courir à gauche :", slug: "run-left", touch: "Flèche de gauche"),
+        Touch(id: 0, name: "Saut :", slug: touchSlug.jump.rawValue, touch: Fr.upArrow.rawValue),
+        Touch(id: 1, name: "S'accroupir :", slug: touchSlug.crouch.rawValue, touch: Fr.downArrow.rawValue),
+        Touch(id: 2, name: "Courir à droite :", slug: touchSlug.runRight.rawValue, touch: Fr.rightArrow.rawValue),
+        Touch(id: 3, name: "Courir à gauche :", slug: touchSlug.runLeft.rawValue, touch: Fr.leftArrow.rawValue),
         Touch(id: 4, name: "Saut diagonale à gauche :", slug: "diag-jump-left", touch: "Touche Z"),
-        Touch(id: 6, name: "Saut diagonale à droite :", slug: "diag-jump-right", touch: "Touche X")
+        Touch(id: 5, name: "Saut diagonale à droite :", slug: "diag-jump-right", touch: "Touche X")
     ] { didSet { didChange.send() } }
 
     var touchsEn: [Touch] = [
-        Touch(id: 0, name: "Jump :", slug: "jump", touch: "Up Arrow"),
-        Touch(id: 1, name: "Crouch :", slug: "crouch", touch: "Down Arrow"),
-        Touch(id: 2, name: "Run Right :", slug: "run-right", touch: "Right Arrow"),
-        Touch(id: 3, name: "Run Left :", slug: "run-left", touch: "Left Arrow"),
+        Touch(id: 0, name: "Jump :", slug: touchSlug.jump.rawValue, touch: En.upArrow.rawValue),
+        Touch(id: 1, name: "Crouch :", slug: touchSlug.crouch.rawValue, touch: En.downArrow.rawValue),
+        Touch(id: 2, name: "Run Right :", slug: touchSlug.runRight.rawValue, touch: En.rightArrow.rawValue),
+        Touch(id: 3, name: "Run Left :", slug: touchSlug.runLeft.rawValue, touch: En.leftArrow.rawValue),
         Touch(id: 4, name: "Diagonal jump left :", slug: "diag-jump-left", touch: "Touch Z"),
-        Touch(id: 6, name: "Diagonal jump right :", slug: "diag-jump-right", touch: "Touch X")
+        Touch(id: 5, name: "Diagonal jump right :", slug: "diag-jump-right", touch: "Touch X")
     ] { didSet { didChange.send() } }
     
     var volume: Double = 0.6 { didSet { didChange.send() } }
     var lang: String = "en" { didSet { didChange.send() } }
     var mapping: Mapping = Mapping() { didSet { didChange.send() } }
+    
+    
+    func ChangeKey(slug: String, event: NSEvent) {
+        var i: Int = 0
+        switch slug {
+        case touchSlug.jump.rawValue:
+            self.mapping.jump = event.keyCode
+        case touchSlug.crouch.rawValue:
+            self.mapping.crouch = event.keyCode
+            i = 1
+        case touchSlug.runLeft.rawValue:
+            self.mapping.runLeft = event.keyCode
+            i = 2
+        case touchSlug.runRight.rawValue:
+            self.mapping.runRight = event.keyCode
+            i = 3
+        case touchSlug.diagJumpLeft.rawValue:
+            self.mapping.diagJumpLeft = event.keyCode
+            i = 4
+        case touchSlug.diagJumpRight.rawValue:
+            self.mapping.diagJumpRight = event.keyCode
+            i = 5
+        default:
+            return
+        }
+        if let char = event.characters {
+            switch event.keyCode {
+            case macOSDefaultKey.downArrow.rawValue:
+                touchsFr[i].touch = Fr.downArrow.rawValue
+                touchsEn[i].touch = En.downArrow.rawValue
+            case macOSDefaultKey.upArrow.rawValue:
+                touchsFr[i].touch = Fr.upArrow.rawValue
+                touchsEn[i].touch = En.upArrow.rawValue
+            case macOSDefaultKey.leftArrow.rawValue:
+                touchsFr[i].touch = Fr.leftArrow.rawValue
+                touchsEn[i].touch = En.leftArrow.rawValue
+            case macOSDefaultKey.rightArrow.rawValue:
+                touchsFr[i].touch = Fr.rightArrow.rawValue
+                touchsEn[i].touch = En.rightArrow.rawValue
+            default:
+                touchsFr[i].touch = "Touche " + char.uppercased()
+                touchsEn[i].touch = "Touch " + char.uppercased()
+            }
+        }
+        return
+    }
     
 }
