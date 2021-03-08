@@ -30,13 +30,7 @@ struct KeysView: View {
                 MenuView()
             } else {
                 ZStack {
-                    Button(action: {
-                        menuView.self.toggle()
-                    }, label: {
-                        Image(systemName: "chevron.left")
-                    }).buttonStyle(PlainButtonStyle()).font(.largeTitle)
-                    .foregroundColor(.red)
-                    .position(x: 30, y: 30)
+                    ButtonReturn(menuView: $menuView)
                     
                     VStack(alignment: .center, spacing: 20) {
                         Spacer()
@@ -46,27 +40,15 @@ struct KeysView: View {
                             Text(MenuClass.En.menuTitleKey.rawValue)
                         }
                         VStack(alignment: .center, spacing: 5) {
-                            if menuData.lang == "fr" {
-                                ForEach(menuData.touchsFr, content: { touch in
-                                    HStack(alignment: .center) {
-                                        Text(touch.name)
-                                        Spacer()
-                                        Button(touch.touch, action: {
-                                            changeKey(touch: touch.slug)
-                                        }).font(.title)
-                                    }
-                                })
-                            } else {
-                                ForEach(menuData.touchsEn, content: { touch in
-                                    HStack(alignment: .center) {
-                                        Text(touch.name)
-                                        Spacer()
-                                        Button(touch.touch, action: {
-                                            changeKey(touch: touch.slug)
-                                        }).font(.title)
-                                    }
-                                })
-                            }
+                            ForEach(menuData.lang == "fr" ? menuData.touchsFr : menuData.touchsEn, content: { touch in
+                                HStack(alignment: .center) {
+                                    Text(touch.name)
+                                    Spacer()
+                                    Button(touch.touch, action: {
+                                        changeKey(touch: touch.slug)
+                                    }).font(.title)
+                                }
+                            })
                         }.frame(width: 400, height: .none, alignment: .center)
                         .buttonStyle(PlainButtonStyle())
                         Spacer()

@@ -20,13 +20,7 @@ struct MusicOptView: View {
                 MenuView()
             } else {
                 ZStack {
-                    Button(action: {
-                        menuView.self.toggle()
-                    }, label: {
-                        Image(systemName: "chevron.left")
-                    }).buttonStyle(PlainButtonStyle()).font(.largeTitle)
-                    .foregroundColor(.red)
-                    .position(x: 30, y: 30)
+                    ButtonReturn(menuView: $menuView)
                     
                     VStack(alignment: .center, spacing: 10) {
                         Spacer()
