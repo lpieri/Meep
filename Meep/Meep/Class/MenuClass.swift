@@ -136,10 +136,10 @@ class MenuClass: ObservableObject {
             i = 1
         case touchSlug.runLeft.rawValue:
             self.mapping.runLeft = event.keyCode
-            i = 2
+            i = 3
         case touchSlug.runRight.rawValue:
             self.mapping.runRight = event.keyCode
-            i = 3
+            i = 2
         case touchSlug.diagJumpLeft.rawValue:
             self.mapping.diagJumpLeft = event.keyCode
             i = 4

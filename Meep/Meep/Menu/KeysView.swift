@@ -16,10 +16,11 @@ struct KeysView: View {
     @State var textAlert = "Presse touch..."
     
     func changeKey(touch: String) {
+        self.textAlert = "Presse touch..."
         self.changeTouch.toggle()
         if changeTouch {
             menuData.ChangeKey(slug: touch, event: NSApplication.shared.nextEvent(matching: .keyDown, until: .distantFuture, inMode: .eventTracking, dequeue: .init())!)
-            self.textAlert = "It's done !!"
+            self.changeTouch.toggle()
             print("touch:", touch, changeTouch)
         }
     }
@@ -49,6 +50,9 @@ struct KeysView: View {
                                     }).font(.title)
                                 }
                             })
+                            if changeTouch {
+                                Text(self.textAlert)
+                            }
                         }.frame(width: 400, height: .none, alignment: .center)
                         .buttonStyle(PlainButtonStyle())
                         Spacer()
