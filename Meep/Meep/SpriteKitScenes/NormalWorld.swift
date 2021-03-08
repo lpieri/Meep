@@ -14,12 +14,13 @@ public class NormalWorld: SKScene, SKPhysicsContactDelegate {
     public var cameraNode: SKCameraNode!
     public var player: Player!
     public var cameraMove: Bool!
-    
     public var lang: String?
-    
-    convenience init?(fileNamed: String, lang: String) {
+    private var mapping: MenuClass.Mapping?
+
+    convenience init?(fileNamed: String, lang: String, mapping: MenuClass.Mapping) {
         self.init(fileNamed: fileNamed)
         self.lang = lang
+        self.mapping = mapping
     }
     
     public override func didMove(to view: SKView) {
@@ -137,7 +138,7 @@ public class NormalWorld: SKScene, SKPhysicsContactDelegate {
         if let name = contact.bodyA.node?.name {
             if name == "Spade" {
                 if player.numberOfLife - 1 == 0 {
-                    let newScene = GameOver(level: "Normal", lang: self.lang!)
+                    let newScene = GameOver(level: "Normal", lang: self.lang!, mapping: self.mapping!)
                     self.scene?.view?.presentScene(newScene, transition: .fade(withDuration: 1))
                 } else {
                     let heart = childNode(withName: "//Heart\(player.numberOfLife)") as! SKSpriteNode
@@ -234,17 +235,17 @@ public class NormalWorld: SKScene, SKPhysicsContactDelegate {
     public override func keyDown(with event: NSEvent) {
         let key = event.keyCode
         switch key {
-        case macOSKeyMap.leftArrow.rawValue:
+        case mapping?.runLeft:
             player.moveBackPlayer()
-        case macOSKeyMap.rightArrow.rawValue:
+        case mapping?.runRight:
             player.runPlayer()
-        case macOSKeyMap.downArrow.rawValue:
+        case mapping?.crouch:
             player.squattingPlayer()
-        case macOSKeyMap.upArrow.rawValue:
+        case mapping?.jump:
             player.jumpPlayer()
-        case macOSKeyMap.touchZ.rawValue:
+        case mapping?.diagJumpLeft:
             player.diagonalJump(direction: "Left")
-        case macOSKeyMap.touchX.rawValue:
+        case mapping?.diagJumpRight:
             player.diagonalJump(direction: "Right")
         default:
             return
@@ -254,7 +255,7 @@ public class NormalWorld: SKScene, SKPhysicsContactDelegate {
     public override func keyUp(with event: NSEvent) {
         let key = event.keyCode
         switch key {
-        case macOSKeyMap.downArrow.rawValue:
+        case mapping?.crouch:
             player.noSquattingPlayer()
         default:
             return

@@ -17,10 +17,12 @@ public class ReverseWorld: SKScene, SKPhysicsContactDelegate {
     public var cameraMove: Bool!
     public var player: Player!
     public var lang: String?
+    private var mapping: MenuClass.Mapping?
 
-    convenience init?(fileNamed: String, lang: String) {
+    convenience init?(fileNamed: String, lang: String, mapping: MenuClass.Mapping) {
         self.init(fileNamed: fileNamed)
         self.lang = lang
+        self.mapping = mapping
     }
     
     public override func didMove(to view: SKView) {
@@ -142,11 +144,11 @@ public class ReverseWorld: SKScene, SKPhysicsContactDelegate {
                     }
                 }
             } else if name == "TimeRift" && player.getKey == true {
-                let newScene = HistoryScene(level: "Normal", lang: self.lang!)
+                let newScene = HistoryScene(level: "Normal", lang: self.lang!, mapping: self.mapping!)
                 self.scene?.view?.presentScene(newScene, transition: .fade(withDuration: 1))
             } else if name == "Spade" {
                 if player.numberOfLife - 1 == 0 {
-                    let newScene = GameOver(level: "Reverse", lang: self.lang!)
+                    let newScene = GameOver(level: "Reverse", lang: self.lang!, mapping: self.mapping!)
                     self.scene?.view?.presentScene(newScene, transition: .fade(withDuration: 1))
                 } else {
                     let heart = childNode(withName: "//Heart\(player.numberOfLife)") as! SKSpriteNode
@@ -219,17 +221,17 @@ public class ReverseWorld: SKScene, SKPhysicsContactDelegate {
     public override func keyDown(with event: NSEvent) {
         let key = event.keyCode
         switch key {
-        case macOSKeyMap.leftArrow.rawValue:
+        case mapping?.runLeft:
             player.runPlayer()
-        case macOSKeyMap.rightArrow.rawValue:
+        case mapping?.runRight:
             player.moveBackPlayer()
-        case macOSKeyMap.downArrow.rawValue:
+        case mapping?.crouch:
             player.jumpPlayer()
-        case macOSKeyMap.upArrow.rawValue:
+        case mapping?.jump:
             player.squattingPlayer()
-        case macOSKeyMap.touchZ.rawValue:
+        case mapping?.diagJumpLeft:
             player.diagonalJump(direction: "Left")
-        case macOSKeyMap.touchX.rawValue:
+        case mapping?.diagJumpRight:
             player.diagonalJump(direction: "Right")
         default:
             return
@@ -239,7 +241,7 @@ public class ReverseWorld: SKScene, SKPhysicsContactDelegate {
     public override func keyUp(with event: NSEvent) {
         let key = event.keyCode
         switch key {
-        case macOSKeyMap.upArrow.rawValue:
+        case mapping?.jump:
             player.noSquattingPlayer()
         default:
             return

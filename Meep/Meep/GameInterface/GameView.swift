@@ -19,7 +19,7 @@ struct GameView: View {
             MenuView()
         } else {
             ZStack {
-                SpriteKitInterface(scene: HistoryScene(level: "Reverse", lang: menuData.lang), volume: Float(menuData.volume))
+                SpriteKitInterface(scene: HistoryScene(level: "Reverse", lang: menuData.lang, mapping: menuData.mapping), volume: Float(menuData.volume))
                 ButtonReturn(menuView: $menuView)
             }
         }

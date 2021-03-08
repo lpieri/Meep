@@ -55,8 +55,9 @@ public class HistoryScene: SKScene {
     private let historyText: String
     private let label: SKLabelNode
     private var lang: String
+    private var mapping: MenuClass.Mapping
     
-    public init(level: String, lang: String) {
+    init(level: String, lang: String, mapping: MenuClass.Mapping) {
         self.lang = lang
         if lang == "fr" {
             continueMessage = "Appuyer sur espace pour continuer..."
@@ -71,6 +72,7 @@ public class HistoryScene: SKScene {
         let size = CGSize(width: 1024, height: 768)
         self.currentLevel = level
         self.label = SKLabelNode(text: self.continueMessage)
+        self.mapping = mapping
         super.init(size: size)
         self.backgroundColor = .init(red: 64 / 255, green: 68 / 255, blue: 69 / 255, alpha: 1)
         self.scaleMode = .aspectFill
@@ -98,9 +100,9 @@ public class HistoryScene: SKScene {
     public func changeScene(level: String) {
         var newScene: SKScene
         if currentLevel == "Reverse" {
-            newScene = ReverseWorld(fileNamed: "levelReverse", lang: self.lang)!
+            newScene = ReverseWorld(fileNamed: "levelReverse", lang: self.lang, mapping: self.mapping)!
         } else {
-            newScene = NormalWorld(fileNamed: "levelNormal", lang: self.lang)!
+            newScene = NormalWorld(fileNamed: "levelNormal", lang: self.lang, mapping: self.mapping)!
         }
         self.scene?.view?.presentScene(newScene, transition: .fade(withDuration: 1))
     }
