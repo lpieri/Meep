@@ -12,6 +12,7 @@ struct LanguageView: View {
     
     @EnvironmentObject var menuData: MenuClass
     @State var menuView: Bool = false
+    @State var en: Bool = true
     
     var body: some View {
         ZStack {
@@ -24,16 +25,36 @@ struct LanguageView: View {
                     VStack(alignment: .center, spacing: 20) {
                         Spacer()
                         if menuData.lang == "fr" {
-                            Text(MenuClass.Fr.menuTitleLang.rawValue).font(.largeTitle)
+                            Text(MenuClass.Fr.menuTitleLang.rawValue)
                         } else {
-                            Text(MenuClass.En.menuTitleLang.rawValue).font(.largeTitle)
+                            Text(MenuClass.En.menuTitleLang.rawValue)
                         }
-                        VStack (alignment: .center, spacing: 10) {
-                            Button(action: {menuData.lang = "fr"}, label: {Text("Français")}).buttonStyle(PlainButtonStyle()).font(.title)
-                            Button(action: {menuData.lang = "en"}, label: {Text("English")}).buttonStyle(PlainButtonStyle()).font(.title)
-                        }
+                        
+                        VStack(alignment: .center, spacing: 5) {
+                            HStack(alignment: .center) {
+                                Button(action: {
+                                    menuData.lang = "fr"
+                                    self.en.toggle()
+                                }, label: {Text("Français")}).buttonStyle(PlainButtonStyle())
+                                if !en {
+                                    Image(systemName: "checkmark")
+                                }
+                            }
+                            
+                            HStack(alignment: .center) {
+                                Button(action: {
+                                    menuData.lang = "en"
+                                    self.en.toggle()
+                                }, label: {Text("English")}).buttonStyle(PlainButtonStyle())
+                                if en {
+                                    Image(systemName: "checkmark")
+                                }
+                            }
+                        }.frame(width: 400, height: .none, alignment: .center)
+                        
                         Spacer()
                     }.padding()
+                    .font(.largeTitle)
                 }
             }
         }.frame(maxWidth: .infinity, maxHeight: .infinity)
