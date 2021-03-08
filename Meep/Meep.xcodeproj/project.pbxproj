@@ -81,7 +81,6 @@
 		B74C081E25DBF5B900F3B3BE /* GameInterface */ = {
 			isa = PBXGroup;
 			children = (
-				B77C564425DAA8B00019C48D /* GameView.swift */,
 				B70DA41325EF966D00328504 /* vlad-gluschenko-sea-breeze.mp3 */,
 				B77C564725DAA9370019C48D /* SpriteKitInterface.swift */,
 			);
@@ -91,6 +90,7 @@
 		B77C563D25DAA1A60019C48D /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				B77C564425DAA8B00019C48D /* GameView.swift */,
 				B7E3F21324F92993001DFD32 /* MenuView.swift */,
 				B7E3F22624F94DA6001DFD32 /* KeysView.swift */,
 				B70DA41025EF8B5200328504 /* MusicOptView.swift */,
