@@ -63,7 +63,10 @@ struct MenuView: View {
                             }
                         })
                         
-                        Button(action: { NSApplication.shared.terminate(self) }, label: {
+                        Button(action: {
+                            menuData.InitUserDefaults(data: UserDefaults.standard)
+                            NSApplication.shared.terminate(self)
+                        }, label: {
                             if menuData.lang == "fr" {
                                 Text(MenuClass.Fr.exit.rawValue)
                             } else {

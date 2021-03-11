@@ -11,8 +11,9 @@ import SwiftUI
 
 class MenuClass: ObservableObject {
     
-    let didChange = PassthroughSubject<Void, Never>()
-    
+    /*
+     Enums
+     */
     enum macOSDefaultKey: UInt16 {
         case touchZ = 6
         case touchX = 7
@@ -64,6 +65,9 @@ class MenuClass: ObservableObject {
         case leftArrow = "Left Arrow"
     }
     
+    /*
+     Structures
+     */
     struct Mapping {
         var jump: UInt16
         var crouch: UInt16
@@ -82,20 +86,20 @@ class MenuClass: ObservableObject {
         }
     }
     
-    struct Touch: Identifiable {
-        var id: NSNumber
+    class Touch: Identifiable, Codable {
+        var id: Int
         var name: String
         var slug: String
         var touch: String
         
         init () {
-            self.id = NSNumber(0)
+            self.id = 0
             self.name = "default"
             self.slug = "default"
             self.touch = "default"
         }
             
-        init (id: NSNumber, name: String, slug: String, touch: String) {
+        init (id: Int, name: String, slug: String, touch: String) {
             self.id = id
             self.name = name
             self.slug = slug
@@ -103,6 +107,10 @@ class MenuClass: ObservableObject {
         }
     }
     
+    /*
+     Variables
+     */
+    let didChange = PassthroughSubject<Void, Never>()
     var touchsFr: [Touch] = [
         Touch(id: 0, name: "Saut :", slug: touchSlug.jump.rawValue, touch: Fr.upArrow.rawValue),
         Touch(id: 1, name: "S'accroupir :", slug: touchSlug.crouch.rawValue, touch: Fr.downArrow.rawValue),
@@ -111,7 +119,6 @@ class MenuClass: ObservableObject {
         Touch(id: 4, name: "Saut diagonale à gauche :", slug: "diag-jump-left", touch: "Touche Z"),
         Touch(id: 5, name: "Saut diagonale à droite :", slug: "diag-jump-right", touch: "Touche X")
     ] { didSet { didChange.send() } }
-
     var touchsEn: [Touch] = [
         Touch(id: 0, name: "Jump :", slug: touchSlug.jump.rawValue, touch: En.upArrow.rawValue),
         Touch(id: 1, name: "Crouch :", slug: touchSlug.crouch.rawValue, touch: En.downArrow.rawValue),
@@ -120,11 +127,54 @@ class MenuClass: ObservableObject {
         Touch(id: 4, name: "Diagonal jump left :", slug: "diag-jump-left", touch: "Key Z"),
         Touch(id: 5, name: "Diagonal jump right :", slug: "diag-jump-right", touch: "Key X")
     ] { didSet { didChange.send() } }
-    
     var volume: Double = 0.6 { didSet { didChange.send() } }
     var lang: String = "en" { didSet { didChange.send() } }
     var mapping: Mapping = Mapping() { didSet { didChange.send() } }
     
+    /*
+     Functions
+     */
+    func LoadUserDefaults(data: UserDefaults) {
+        if let lang = data.string(forKey: "Lang") {
+            self.lang = lang
+        } else {
+            self.lang = "en"
+        }
+        self.volume = data.double(forKey: "Vol")
+        if let keyFr = data.array(forKey: "KeyFr") {
+            self.touchsFr = keyFr as! [Touch]
+        }
+        if let keyEn = data.array(forKey: "KeyEn") {
+            self.touchsEn = keyEn as! [Touch]
+        }
+        do {
+            let decoder = JSONDecoder()
+            if let keysData = data.object(forKey: "KeyFr") as? Data {
+                let keysFR = try decoder.decode([Touch].self, from: keysData)
+                self.touchsFr = keysFR
+            }
+            if let keysData = data.object(forKey: "KeyEn") as? Data {
+                let keysEn = try decoder.decode([Touch].self, from: keysData)
+                self.touchsEn = keysEn
+            }
+        } catch {
+            print("No keys")
+        }
+    }
+    
+    func InitUserDefaults(data: UserDefaults) {
+        data.setValue(self.volume, forKey: "Vol")
+        data.setValue(self.lang, forKey: "Lang")
+        do {
+            let encoder = JSONEncoder()
+            let encodeKeyFr = try encoder.encode(touchsFr)
+            let encodeKeyEn = try encoder.encode(touchsEn)
+            data.set(encodeKeyFr, forKey: "KeyFr")
+            data.set(encodeKeyEn, forKey: "KeyEn")
+        } catch {
+            print("No Keys save !")
+        }
+    }
     
     func ChangeKey(slug: String, event: NSEvent) {
         var i: Int = 0

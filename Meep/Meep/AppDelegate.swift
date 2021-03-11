@@ -15,9 +15,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var window: NSWindow!
     let menuData = MenuClass()
 
-
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Create the SwiftUI view that provides the window contents.
+        let hasLaunchedBefore = UserDefaults.standard.bool(forKey: "hasLaunchedBefore")
+        if hasLaunchedBefore {
+            menuData.LoadUserDefaults(data: UserDefaults.standard)
+        } else {
+            UserDefaults.standard.set(true, forKey: "hasLaunchedBefore")
+            menuData.InitUserDefaults(data: UserDefaults.standard)
+        }
         let menuView = MenuView().environmentObject(menuData)
 
         // Create the window and set the content view. 

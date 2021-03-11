@@ -12,7 +12,19 @@ struct LanguageView: View {
     
     @EnvironmentObject var menuData: MenuClass
     @State var menuView: Bool = false
-    @State var en: Bool = true
+    @State var en: Bool
+    
+    init() {
+        if let lang = UserDefaults.standard.string(forKey: "Lang") {
+            if lang == "fr" {
+                self._en = State(initialValue: false)
+            } else {
+                self._en = State(initialValue: true)
+            }
+        } else {
+            self._en = State(initialValue: true)
+        }
+    }
     
     var body: some View {
         ZStack {
@@ -34,6 +46,7 @@ struct LanguageView: View {
                             HStack(alignment: .center) {
                                 Button(action: {
                                     menuData.lang = "fr"
+                                    UserDefaults.standard.setValue("fr", forKey: "Lang")
                                     self.en.toggle()
                                 }, label: {Text("Français")}).buttonStyle(PlainButtonStyle())
                                 if !en {
@@ -44,6 +57,7 @@ struct LanguageView: View {
                             HStack(alignment: .center) {
                                 Button(action: {
                                     menuData.lang = "en"
+                                    UserDefaults.standard.setValue("en", forKey: "Lang")
                                     self.en.toggle()
                                 }, label: {Text("English")}).buttonStyle(PlainButtonStyle())
                                 if en {
