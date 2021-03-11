@@ -68,7 +68,7 @@ class MenuClass: ObservableObject {
     /*
      Structures
      */
-    struct Mapping {
+    class Mapping: Codable {
         var jump: UInt16
         var crouch: UInt16
         var runRight: UInt16
@@ -157,6 +157,10 @@ class MenuClass: ObservableObject {
                 let keysEn = try decoder.decode([Touch].self, from: keysData)
                 self.touchsEn = keysEn
             }
+            if let mappingData = data.object(forKey: "Mapping") as? Data {
+                let mapping = try decoder.decode(Mapping.self, from: mappingData)
+                self.mapping = mapping
+            }
         } catch {
             print("No keys")
         }
@@ -169,8 +173,10 @@ class MenuClass: ObservableObject {
             let encoder = JSONEncoder()
             let encodeKeyFr = try encoder.encode(touchsFr)
             let encodeKeyEn = try encoder.encode(touchsEn)
+            let encodeMapping = try encoder.encode(mapping)
             data.set(encodeKeyFr, forKey: "KeyFr")
             data.set(encodeKeyEn, forKey: "KeyEn")
+            data.set(encodeMapping, forKey: "Mapping")
         } catch {
             print("No Keys save !")
         }
