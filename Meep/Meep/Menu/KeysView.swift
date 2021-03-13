@@ -45,15 +45,22 @@ struct KeysView: View {
                                 HStack(alignment: .center) {
                                     Text(touch.name)
                                     Spacer()
-                                    Button(touch.touch, action: {
+                                    Button(action: {
                                         changeKey(touch: touch.slug)
+                                    }, label: {
+                                        Text(touch.touch)
+                                        .frame(width: 200, height: .none, alignment: .center)
+                                        .padding(.all, 8)
+                                        .foregroundColor(.white)
+                                        .background(Color.gray)
+                                        .cornerRadius(40)
                                     }).font(.title)
                                 }
                             })
                             if changeTouch {
                                 Text(self.textAlert)
                             }
-                        }.frame(width: 400, height: .none, alignment: .center)
+                        }.frame(width: 600, height: .none, alignment: .center)
                         .buttonStyle(PlainButtonStyle())
                         Spacer()
                         

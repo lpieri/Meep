@@ -48,10 +48,23 @@ struct LanguageView: View {
                                     menuData.lang = "fr"
                                     UserDefaults.standard.setValue("fr", forKey: "Lang")
                                     self.en.toggle()
-                                }, label: {Text("Français")}).buttonStyle(PlainButtonStyle())
-                                if !en {
-                                    Image(systemName: "checkmark")
-                                }
+                                }, label: {
+                                    HStack(alignment: .center, spacing: 15) {
+                                        Text("Français")
+                                        if !en {
+                                            Image(systemName: "checkmark")
+                                        } else {
+                                            Image(systemName: "multiply")
+                                        }
+                                    }.font(.title)
+                                    .frame(width: 150, height: .none, alignment: .center)
+                                    .padding(.all, 8)
+                                    .foregroundColor(.white)
+                                    .background(Color.gray)
+                                    .cornerRadius(40)
+                                })
+                                .buttonStyle(PlainButtonStyle())
+
                             }
                             
                             HStack(alignment: .center) {
@@ -59,10 +72,22 @@ struct LanguageView: View {
                                     menuData.lang = "en"
                                     UserDefaults.standard.setValue("en", forKey: "Lang")
                                     self.en.toggle()
-                                }, label: {Text("English")}).buttonStyle(PlainButtonStyle())
-                                if en {
-                                    Image(systemName: "checkmark")
-                                }
+                                }, label: {
+                                    HStack(alignment: .center, spacing: 15) {
+                                        Text("English")
+                                        if en {
+                                            Image(systemName: "checkmark")
+                                        } else {
+                                            Image(systemName: "multiply")
+                                        }
+                                    }.font(.title)
+                                    .frame(width: 150, height: .none, alignment: .center)
+                                    .padding(.all, 8)
+                                    .foregroundColor(.white)
+                                    .background(Color.gray)
+                                    .cornerRadius(40)
+                                })
+                                .buttonStyle(PlainButtonStyle())
                             }
                         }.frame(width: 400, height: .none, alignment: .center)
                         
