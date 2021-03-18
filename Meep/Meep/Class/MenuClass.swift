@@ -116,7 +116,7 @@ class MenuClass: ObservableObject {
         Touch(id: 1, name: "S'accroupir :", slug: touchSlug.crouch.rawValue, touch: Fr.downArrow.rawValue),
         Touch(id: 2, name: "Courir à droite :", slug: touchSlug.runRight.rawValue, touch: Fr.rightArrow.rawValue),
         Touch(id: 3, name: "Courir à gauche :", slug: touchSlug.runLeft.rawValue, touch: Fr.leftArrow.rawValue),
-        Touch(id: 4, name: "Saut diagonale à gauche :", slug: "diag-jump-left", touch: "Touche Z"),
+        Touch(id: 4, name: "Saut diagonale à gauche :", slug: "diag-jump-left", touch: "Touche W"),
         Touch(id: 5, name: "Saut diagonale à droite :", slug: "diag-jump-right", touch: "Touche X")
     ] { didSet { didChange.send() } }
     var touchsEn: [Touch] = [

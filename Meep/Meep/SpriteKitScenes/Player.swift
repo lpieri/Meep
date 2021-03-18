@@ -35,17 +35,20 @@ public class Player: SKSpriteNode {
         self.runOn = true
         self.moveBackOn = true
         var position: CGPoint
-        var rotate: CGFloat
+        var rotate: CGFloat = 0
+        if level == "Level0" {
+            position = CGPoint(x: 1980, y: -291)
+        }
         if level == "Reverse" {
             position = CGPoint(x: 1980, y: 291)
             rotate = .pi / 1
         } else {
-            rotate = 0
             position = CGPoint(x: -1980, y: -291)
         }
-        super.init(texture: SKTexture(imageNamed: "textureReversePlayer"), color: .clear, size: CGSize(width: 20, height: 29))
-        self.xScale = 2
-        self.yScale = 2
+        let texture = SKTexture(imageNamed: "Meep-Bleu-1")
+        super.init(texture: texture, color: .clear, size: texture.size())
+//        self.xScale = 1
+//        self.yScale = 1
         self.position = position
         self.zRotation = rotate
         self.name = "Meep"
@@ -56,35 +59,37 @@ public class Player: SKSpriteNode {
     }
     
     public func runPlayer() {
-        if self.duringAnimation == false {
-            if runOn == true {
-                if levelTexture == "Reverse" {
-                    if self.position.x + self.runValue > self.parentFrame.minX {
-                        self.position.x += self.runValue
-                    }
-                } else if levelTexture == "Normal" {
-                    if self.position.x + self.runValue < self.parentFrame.maxX {
-                        self.position.x += self.runValue
-                    }
-                }
-            }
-        }
+        self.position.x += self.runValue
+//        if self.duringAnimation == false {
+//            if runOn == true {
+//                if levelTexture == "Reverse" {
+//                    if self.position.x + self.runValue > self.parentFrame.minX {
+//                        self.position.x += self.runValue
+//                    }
+//                } else if levelTexture == "Normal" {
+//                    if self.position.x + self.runValue < self.parentFrame.maxX {
+//                        self.position.x += self.runValue
+//                    }
+//                }
+//            }
+//        }
     }
 
     public func moveBackPlayer() {
-        if self.duringAnimation == false {
-            if moveBackOn == true {
-                if levelTexture == "Reverse" {
-                    if self.position.x + self.moveBackValue < self.parentFrame.maxX {
-                        self.position.x += self.moveBackValue
-                    }
-                } else if levelTexture == "Normal" {
-                    if self.position.x + self.moveBackValue > self.parentFrame.minX {
-                        self.position.x += self.moveBackValue
-                    }
-                }
-            }
-        }
+        self.position.x += self.moveBackValue
+//        if self.duringAnimation == false {
+//            if moveBackOn == true {
+//                if levelTexture == "Reverse" {
+//                    if self.position.x + self.moveBackValue < self.parentFrame.maxX {
+//                        self.position.x += self.moveBackValue
+//                    }
+//                } else if levelTexture == "Normal" {
+//                    if self.position.x + self.moveBackValue > self.parentFrame.minX {
+//                        self.position.x += self.moveBackValue
+//                    }
+//                }
+//            }
+//        }
     }
     
     public func diagonalJump(direction: String) {
@@ -120,8 +125,7 @@ public class Player: SKSpriteNode {
     }
     
     public func noSquattingPlayer() {
-        self.texture = SKTexture(imageNamed: "textureReversePlayer")
-        self.yScale = 2
+        self.texture = SKTexture(imageNamed: "Meep-Bleu-1")
     }
     
 }

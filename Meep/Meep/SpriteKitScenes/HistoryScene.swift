@@ -100,7 +100,8 @@ public class HistoryScene: SKScene {
     public func changeScene(level: String) {
         var newScene: SKScene
         if currentLevel == "Reverse" {
-            newScene = ReverseWorld(fileNamed: "levelReverse", lang: self.lang, mapping: self.mapping)!
+//            newScene = ReverseWorld(fileNamed: "Level0", lang: self.lang, mapping: self.mapping)!
+            newScene = Level0(fileNamed: "Level0", lang: self.lang, mapping: self.mapping)!
         } else {
             newScene = NormalWorld(fileNamed: "levelNormal", lang: self.lang, mapping: self.mapping)!
         }
